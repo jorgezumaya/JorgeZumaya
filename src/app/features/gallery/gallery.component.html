@@ -1,0 +1,14 @@
+<section class="page">
+  <h1>Gallery</h1>
+  @if (svc.loading()) {
+    <p>Loading…</p>
+  } @else {
+    <div class="grid">
+      @for (p of svc.photos(); track p.id) {
+        <figure class="tile">
+          <img [src]="p.thumbUrl" [alt]="p.caption" loading="lazy" />
+        </figure>
+      }
+    </div>
+  }
+</section>

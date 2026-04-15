@@ -1,0 +1,25 @@
+<section class="page">
+  <div class="grid">
+    <div>
+      <h1>Let's talk.</h1>
+      <ul class="direct">
+        <li><a href="mailto:jorge.juarez87@me.com">jorge.juarez87&#64;me.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jorgezumaya/" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+      <label>Name<input formControlName="name" /></label>
+      <label>Email<input type="email" formControlName="email" /></label>
+      <label>Subject<input formControlName="subject" /></label>
+      <label>Message<textarea formControlName="message" rows="6"></textarea></label>
+      <!-- honeypot -->
+      <input type="text" formControlName="website" class="honeypot" tabindex="-1" autocomplete="off" />
+      <button type="submit" [disabled]="form.invalid || sending()">
+        {{ sending() ? 'Sending…' : 'Send message' }}
+      </button>
+      @if (sent()) {
+        <p class="success">Thanks — I'll get back to you soon.</p>
+      }
+    </form>
+  </div>
+</section>
