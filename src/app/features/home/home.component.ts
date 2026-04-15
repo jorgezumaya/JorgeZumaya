@@ -1,0 +1,23 @@
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-home',
+  standalone: true,
+  imports: [RouterLink],
+  template: `
+    <section class="hero">
+      <p class="hero__eyebrow">Full Stack Engineer · Fidelity Investments</p>
+      <h1 class="hero__title">
+        jorge<span class="accent">.</span>zumaya
+      </h1>
+      <p class="hero__tag">Building digital experiences at enterprise scale.</p>
+      <div class="hero__actions">
+        <a routerLink="/work" class="btn btn--primary">See my work</a>
+        <a routerLink="/contact" class="btn btn--ghost">Get in touch</a>
+      </div>
+    </section>
+  `,
+  styleUrl: './home.component.scss',
+})
+export class HomeComponent {}

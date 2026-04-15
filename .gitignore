@@ -42,3 +42,14 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Angular environment files (contain Firebase config / API keys)
+src/environments/environment.ts
+src/environments/environment.prod.ts
+src/environments/environment.*.ts
+!src/environments/environment.example.ts
