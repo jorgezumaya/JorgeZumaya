@@ -8,7 +8,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   template: `
     <nav class="nav">
       <a routerLink="/" class="nav__brand" aria-label="Home">
-        <img src="/assets/logo/logo-nav.svg" alt="jorge.zumaya" height="28" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 80" height="28" role="img" aria-label="Jorge Zumaya">
+          <title>jorge.zumaya</title>
+          <text x="220" y="56" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-weight="700" font-size="48" letter-spacing="-1" text-anchor="middle" fill="#FAFAFA">jorge<tspan fill="#FF3D00">.</tspan>zumaya</text>
+        </svg>
       </a>
       <button class="nav__toggle" (click)="open.set(!open())" [attr.aria-expanded]="open()">
         <span></span><span></span><span></span>
