@@ -7,7 +7,6 @@ export interface Project {
   link?: string;
 }
 
-// TODO: add more projects from resume when available
 export const PROJECTS: Project[] = [
   {
     slug: 'apex-url-api',
@@ -33,5 +32,14 @@ export const PROJECTS: Project[] = [
     stack: ['Angular', 'Firebase', 'SCSS', 'GitHub Actions'],
     link: 'https://jorgezumaya.me',
     featured: true,
+  },
+  {
+    slug: 'avila-contracting',
+    title: 'Avila Contracting LLC',
+    description:
+      'Full-stack business web app for a local contracting company. Public marketing pages alongside a protected admin dashboard with a bid generator, client contacts manager, and project history tracker. Auth0 + Firebase authentication, responsive Angular Material sidenav, SSR, and a Vitest test suite.',
+    stack: ['Angular', 'Auth0', 'Firebase', 'Angular Material', 'TypeScript', 'SSR'],
+    featured: false,
+    link: 'https://avilacontractingllc.com',
   },
 ];
