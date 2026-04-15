@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         <p class="footer__copy">© {{ year }} Jorge Zumaya</p>
         <ul class="footer__social">
           <li><a href="https://www.linkedin.com/in/jorgezumaya/" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://github.com/jorgezumaya" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="mailto:jorge.juarez87@me.com">Email</a></li>
         </ul>
       </div>
