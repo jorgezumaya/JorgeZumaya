@@ -4,30 +4,149 @@
   padding: var(--space-16) var(--container-pad);
 }
 
+.page__header {
+  margin-bottom: var(--space-12);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
 h1 {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 5rem);
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-8);
+  line-height: 1;
 }
 
+// ── Reveal animation ───────────────────────────────────────
+:host ::ng-deep .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// ── Grid ───────────────────────────────────────────────────
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2px;
+  gap: 4px;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.tile {
+// ── Skeleton loaders ───────────────────────────────────────
+.skeleton {
   aspect-ratio: 1;
-  background: var(--color-surface);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.6s var(--ease-in-out) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+// ── Photo tile ─────────────────────────────────────────────
+.tile {
+  position: relative;
+  aspect-ratio: 1;
   overflow: hidden;
+  cursor: pointer;
+  background: var(--color-surface);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 400ms var(--ease-out);
+    display: block;
   }
 
-  &:hover img { transform: scale(1.05); }
+  &:hover img {
+    transform: scale(1.06);
+  }
+
+  &:hover .tile__overlay {
+    opacity: 1;
+  }
+}
+
+.tile__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-4);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+  }
+}
+
+.tile__caption {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.tile__likes {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: var(--space-1);
+}
+
+// ── Empty state ────────────────────────────────────────────
+.empty {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-text-mute);
+  padding: var(--space-16) 0;
 }

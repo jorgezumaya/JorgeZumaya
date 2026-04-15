@@ -1,4 +1,95 @@
 <section class="page">
-  <h1>Experience</h1>
-  <p>Timeline goes here.</p>
+  <header class="page__header" appReveal>
+    <p class="eyebrow">Career</p>
+    <h1>Experience</h1>
+  </header>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    @for (company of companies; track company.name) {
+      <div class="timeline__company" appReveal>
+        <div class="timeline__company-header">
+          <span class="timeline__company-name">{{ company.name }}</span>
+          <span class="timeline__company-location">{{ company.location }}</span>
+        </div>
+
+        <div class="timeline__roles">
+          @for (role of company.roles; track role.title + role.period) {
+            <div class="timeline__entry">
+              <div class="timeline__entry-marker" aria-hidden="true">
+                <span class="timeline__dot"></span>
+                <span class="timeline__line"></span>
+              </div>
+              <div class="timeline__entry-body">
+                <div class="timeline__entry-meta">
+                  <h2 class="timeline__role-title">{{ role.title }}</h2>
+                  <span class="timeline__period">{{ role.period }}</span>
+                </div>
+                <ul class="timeline__bullets">
+                  @for (bullet of role.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+                <ul class="timeline__stack">
+                  @for (tag of role.stack; track tag) {
+                    <li class="chip">{{ tag }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Education -->
+  <div class="education" appReveal>
+    <h2 class="section-heading">Education</h2>
+    <div class="education__grid">
+      @for (edu of education; track edu.degree) {
+        <div class="education__card">
+          <p class="education__degree">{{ edu.degree }}</p>
+          <p class="education__institution">{{ edu.institution }}</p>
+          <p class="education__period">{{ edu.period }}</p>
+          @if (edu.note) {
+            <p class="education__note">{{ edu.note }}</p>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Tech Stack Chips -->
+  <div class="tech-stack" appReveal>
+    <h2 class="section-heading">Tech Stack</h2>
+    <div class="tech-stack__grid">
+      @for (cat of techStack; track cat.label) {
+        <div class="tech-stack__category">
+          <p class="tech-stack__label">{{ cat.label }}</p>
+          <ul class="tech-stack__chips">
+            @for (chip of cat.chips; track chip) {
+              <li class="chip">{{ chip }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="testimonials" appReveal>
+    <h2 class="section-heading">Peer Feedback</h2>
+    <div class="testimonials__grid">
+      @for (t of testimonials; track t.author) {
+        <blockquote class="testimonial-card">
+          <p class="testimonial-card__quote">"{{ t.quote }}"</p>
+          <footer class="testimonial-card__footer">
+            <span class="testimonial-card__author">{{ t.author }}</span>
+            <span class="testimonial-card__meta">{{ t.role }} · {{ t.date }}</span>
+          </footer>
+        </blockquote>
+      }
+    </div>
+  </div>
 </section>

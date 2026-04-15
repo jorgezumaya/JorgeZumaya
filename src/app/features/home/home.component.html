@@ -1,11 +1,50 @@
+<!-- Hero -->
 <section class="hero">
   <p class="hero__eyebrow">Full Stack Engineer · Fidelity Investments</p>
   <h1 class="hero__title">
     jorge<span class="accent">.</span>zumaya
   </h1>
-  <p class="hero__tag">Building digital experiences at enterprise scale.</p>
+  <p class="hero__tag">Currently building at Fidelity Investments.</p>
   <div class="hero__actions">
-    <a routerLink="/work" class="btn btn--primary">See my work</a>
-    <a routerLink="/contact" class="btn btn--ghost">Get in touch</a>
+    <a routerLink="/contact" class="btn btn--primary">Let's build something</a>
+    <a routerLink="/work" class="btn btn--ghost">See my work</a>
+  </div>
+</section>
+
+<!-- Featured Work -->
+<section class="featured" appReveal>
+  <div class="featured__inner">
+    <header class="featured__header">
+      <p class="eyebrow">Selected Projects</p>
+      <h2 class="featured__title">Work</h2>
+    </header>
+    <div class="featured__grid">
+      @for (project of featuredProjects; track project.slug) {
+        <app-project-card [project]="project" />
+      }
+    </div>
+    <a routerLink="/work" class="featured__more">View all projects →</a>
+  </div>
+</section>
+
+<!-- Pull-quote testimonial -->
+<section class="quote" appReveal>
+  <div class="quote__inner">
+    <span class="quote__mark" aria-hidden="true">"</span>
+    <blockquote>
+      <p class="quote__text">{{ featuredQuote.text }}</p>
+      <footer class="quote__attribution">
+        <span class="quote__author">{{ featuredQuote.author }}</span>
+        <span class="quote__role">{{ featuredQuote.role }}</span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- CTA Strip -->
+<section class="cta">
+  <div class="cta__inner">
+    <p class="cta__text">Let's build something</p>
+    <a routerLink="/contact" class="cta__link" aria-label="Get in touch">→</a>
   </div>
 </section>

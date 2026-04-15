@@ -1,14 +1,36 @@
 <section class="page">
-  <h1>Gallery</h1>
+  <header class="page__header" appReveal>
+    <p class="eyebrow">Photography</p>
+    <h1>Gallery</h1>
+  </header>
+
   @if (svc.loading()) {
-    <p>Loading…</p>
+    <!-- Skeleton loader — 6 pulse tiles matching grid layout -->
+    <div class="grid">
+      @for (_ of [1, 2, 3, 4, 5, 6]; track $index) {
+        <div class="skeleton" aria-hidden="true"></div>
+      }
+    </div>
+  } @else if (svc.photos().length === 0) {
+    <p class="empty">Photos coming soon.</p>
   } @else {
     <div class="grid">
       @for (p of svc.photos(); track p.id) {
-        <figure class="tile">
+        <figure class="tile" (click)="open(p)">
           <img [src]="p.thumbUrl" [alt]="p.caption" loading="lazy" />
+          <div class="tile__overlay" aria-hidden="true">
+            <p class="tile__caption">{{ p.caption }}</p>
+            <p class="tile__likes">❤ {{ fakeLikes(p.order) }}</p>
+          </div>
         </figure>
       }
     </div>
   }
 </section>
+
+@if (selectedPhoto()) {
+  <app-photo-modal
+    [photo]="selectedPhoto()!"
+    (close)="closeModal()"
+  />
+}

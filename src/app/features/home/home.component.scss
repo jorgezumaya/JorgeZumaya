@@ -1,3 +1,4 @@
+// ── Hero ───────────────────────────────────────────────────
 .hero {
   min-height: calc(100vh - 80px);
   display: flex;
@@ -23,7 +24,10 @@
     letter-spacing: -0.04em;
     line-height: 0.95;
     margin-bottom: var(--space-6);
-    .accent { color: var(--color-accent); }
+
+    .accent {
+      color: var(--color-accent);
+    }
   }
 
   &__tag {
@@ -33,7 +37,11 @@
     margin-bottom: var(--space-8);
   }
 
-  &__actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+  &__actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
 }
 
 .btn {
@@ -44,6 +52,194 @@
   border-radius: var(--radius-sm);
   transition: all var(--dur-fast) var(--ease-out);
 
-  &--primary { background: var(--color-accent); color: var(--color-bg); &:hover { background: var(--color-accent-2); } }
-  &--ghost   { border: 1px solid var(--color-border); &:hover { border-color: var(--color-accent); color: var(--color-accent); } }
+  &--primary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+
+    &:hover {
+      background: var(--color-accent-2);
+    }
+  }
+
+  &--ghost {
+    border: 1px solid var(--color-border);
+
+    &:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  }
+}
+
+// ── Reveal animation ───────────────────────────────────────
+:host ::ng-deep .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// ── Shared ─────────────────────────────────────────────────
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+// ── Featured Work ──────────────────────────────────────────
+.featured {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-24) var(--container-pad);
+
+  &__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  &__header {
+    margin-bottom: var(--space-10);
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  &__grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1fr;
+
+    @media (min-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__more {
+    display: inline-block;
+    margin-top: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-mute);
+    letter-spacing: 0.04em;
+    transition: color var(--dur-fast) var(--ease-out);
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+}
+
+// ── Pull-quote ─────────────────────────────────────────────
+.quote {
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-24) var(--container-pad);
+  background: var(--color-surface);
+
+  &__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    padding-left: var(--space-12);
+  }
+
+  &__mark {
+    position: absolute;
+    left: 0;
+    top: -0.2em;
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 10rem);
+    line-height: 1;
+    color: var(--color-accent);
+    user-select: none;
+  }
+
+  &__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+  }
+
+  &__attribution {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  &__author {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  &__role {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-text-mute);
+  }
+}
+
+// ── CTA Strip ──────────────────────────────────────────────
+.cta {
+  background: var(--color-accent);
+  padding: var(--space-12) var(--container-pad);
+
+  &__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  &__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--color-bg);
+    line-height: 1;
+  }
+
+  &__link {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    color: var(--color-bg);
+    line-height: 1;
+    transition: transform var(--dur-fast) var(--ease-out);
+
+    &:hover {
+      transform: translateX(8px);
+    }
+  }
 }

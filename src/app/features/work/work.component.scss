@@ -4,9 +4,73 @@
   padding: var(--space-16) var(--container-pad);
 }
 
+.page__header {
+  margin-bottom: var(--space-12);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
 h1 {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 5rem);
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-8);
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.page__sub {
+  font-size: 1rem;
+  color: var(--color-text-mute);
+  max-width: 48ch;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.page__note {
+  margin-top: var(--space-12);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-mute);
+  letter-spacing: 0.04em;
+}
+
+// ── Reveal animation ───────────────────────────────────────
+:host ::ng-deep .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host ::ng-deep .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

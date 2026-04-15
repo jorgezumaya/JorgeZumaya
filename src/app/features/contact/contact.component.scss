@@ -4,30 +4,85 @@
   padding: var(--space-16) var(--container-pad);
 }
 
-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  letter-spacing: -0.03em;
-  margin-bottom: var(--space-8);
-}
-
-.grid {
+.layout {
   display: grid;
-  gap: var(--space-12);
+  gap: var(--space-16);
   grid-template-columns: 1fr;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
+    align-items: start;
   }
 }
 
-.direct {
-  list-style: none;
-  font-family: var(--font-mono);
-
-  li { margin-bottom: var(--space-2); }
+// ── Left info column ───────────────────────────────────────
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.info__sub {
+  font-size: 1rem;
+  color: var(--color-text-mute);
+  line-height: 1.6;
+  max-width: 36ch;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.link-chip {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out);
+
+  &:hover {
+    border-color: var(--color-accent);
+    background: var(--color-surface-2);
+  }
+
+  &__label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    min-width: 5ch;
+  }
+
+  &__value {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-text-mute);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  &:hover &__value {
+    color: var(--color-text);
+  }
+}
+
+// ── Form ───────────────────────────────────────────────────
 .form {
   display: flex;
   flex-direction: column;
@@ -39,7 +94,9 @@ label {
   flex-direction: column;
   gap: var(--space-2);
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--color-text-mute);
 }
 
@@ -51,6 +108,8 @@ textarea {
   color: var(--color-text);
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color var(--dur-fast) var(--ease-out);
 
   &:focus {
     outline: none;
@@ -58,22 +117,88 @@ textarea {
   }
 }
 
-button {
+textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+button[type='submit'] {
   padding: var(--space-4);
   background: var(--color-accent);
   color: var(--color-bg);
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   border-radius: var(--radius-sm);
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
 
-  &:disabled { opacity: 0.5; }
+  &:hover:not(:disabled) {
+    background: var(--color-accent-2);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
 }
 
 .honeypot {
   position: absolute;
   left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
+// ── Success state ──────────────────────────────────────────
 .success {
-  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text);
   font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.checkmark {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+
+  &__circle {
+    stroke-dasharray: 160;
+    stroke-dashoffset: 160;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: stroke-draw 0.5s var(--ease-out) forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  &__check {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: stroke-draw 0.35s var(--ease-out) 0.4s forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      stroke-dashoffset: 0;
+    }
+  }
+}
+
+@keyframes stroke-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

@@ -1,24 +1,95 @@
 <section class="page">
-  <div class="grid">
-    <div>
+  <div class="layout">
+    <!-- Left: identity info -->
+    <div class="info">
       <h1>Let's talk.</h1>
-      <ul class="direct">
-        <li><a href="mailto:jorge.juarez87@me.com">jorge.juarez87&#64;me.com</a></li>
-        <li><a href="https://www.linkedin.com/in/jorgezumaya/" target="_blank" rel="noopener">LinkedIn</a></li>
+      <p class="info__sub">
+        Have a project in mind? Want to connect? Drop me a line.
+      </p>
+      <ul class="links">
+        <li>
+          <a href="mailto:jorge.juarez87@me.com" class="link-chip">
+            <span class="link-chip__label">Email</span>
+            <span class="link-chip__value">jorge.juarez87&#64;me.com</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/jorgezumaya/"
+            target="_blank"
+            rel="noopener"
+            class="link-chip"
+          >
+            <span class="link-chip__label">LinkedIn</span>
+            <span class="link-chip__value">/in/jorgezumaya</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/jorgezumaya"
+            target="_blank"
+            rel="noopener"
+            class="link-chip"
+          >
+            <span class="link-chip__label">GitHub</span>
+            <span class="link-chip__value">/jorgezumaya</span>
+          </a>
+        </li>
       </ul>
     </div>
+
+    <!-- Right: form -->
     <form [formGroup]="form" (ngSubmit)="submit()" class="form">
-      <label>Name<input formControlName="name" /></label>
-      <label>Email<input type="email" formControlName="email" /></label>
-      <label>Subject<input formControlName="subject" /></label>
-      <label>Message<textarea formControlName="message" rows="6"></textarea></label>
-      <!-- honeypot -->
-      <input type="text" formControlName="website" class="honeypot" tabindex="-1" autocomplete="off" />
+      <label>
+        Name
+        <input formControlName="name" autocomplete="name" />
+      </label>
+      <label>
+        Email
+        <input type="email" formControlName="email" autocomplete="email" />
+      </label>
+      <label>
+        Subject
+        <input formControlName="subject" />
+      </label>
+      <label>
+        Message
+        <textarea formControlName="message" rows="6"></textarea>
+      </label>
+
+      <!-- honeypot — hidden from real users -->
+      <input
+        type="text"
+        formControlName="website"
+        class="honeypot"
+        tabindex="-1"
+        aria-hidden="true"
+        autocomplete="off"
+      />
+
       <button type="submit" [disabled]="form.invalid || sending()">
         {{ sending() ? 'Sending…' : 'Send message' }}
       </button>
+
       @if (sent()) {
-        <p class="success">Thanks — I'll get back to you soon.</p>
+        <div class="success" role="status">
+          <svg
+            class="checkmark"
+            viewBox="0 0 52 52"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle class="checkmark__circle" cx="26" cy="26" r="24" fill="none" />
+            <path
+              class="checkmark__check"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 27l8 8 16-16"
+            />
+          </svg>
+          <p>Thanks — I'll get back to you soon.</p>
+        </div>
       }
     </form>
   </div>
