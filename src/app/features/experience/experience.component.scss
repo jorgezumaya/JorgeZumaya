@@ -131,7 +131,9 @@ h1 {
   border-radius: 50%;
   background: var(--color-accent);
   flex-shrink: 0;
-  box-shadow: 0 0 0 3px var(--color-bg), 0 0 0 4px var(--color-accent);
+  box-shadow:
+    0 0 0 3px var(--color-bg),
+    0 0 0 4px var(--color-accent);
 }
 
 .timeline__line {

@@ -5,11 +5,7 @@ import { Project } from './projects.data';
   selector: 'app-project-card',
   standalone: true,
   template: `
-    <article
-      class="card"
-      (mousemove)="onTilt($event)"
-      (mouseleave)="resetTilt($event)"
-    >
+    <article class="card" (mousemove)="onTilt($event)" (mouseleave)="resetTilt($event)">
       <div class="card__cover" aria-hidden="true">
         <span class="card__slug">{{ project().slug }}</span>
       </div>
@@ -22,12 +18,9 @@ import { Project } from './projects.data';
           }
         </ul>
         @if (project().link) {
-          <a
-            [href]="project().link"
-            target="_blank"
-            rel="noopener"
-            class="card__link"
-          >View project ↗</a>
+          <a [href]="project().link" target="_blank" rel="noopener" class="card__link"
+            >View project ↗</a
+          >
         }
       </div>
     </article>

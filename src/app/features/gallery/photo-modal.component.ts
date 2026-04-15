@@ -14,15 +14,9 @@ import { Photo } from '../../core/services/gallery.service';
       aria-label="Photo viewer"
       (click)="close.emit()"
     >
-      <button class="close-btn" aria-label="Close photo viewer" (click)="close.emit()">
-        ✕
-      </button>
+      <button class="close-btn" aria-label="Close photo viewer" (click)="close.emit()">✕</button>
       <figure class="modal" (click)="$event.stopPropagation()">
-        <img
-          [src]="photo().url || photo().thumbUrl"
-          [alt]="photo().caption"
-          loading="eager"
-        />
+        <img [src]="photo().url || photo().thumbUrl" [alt]="photo().caption" loading="eager" />
         <figcaption class="modal__caption">
           <p class="modal__caption-text">{{ photo().caption }}</p>
           <p class="modal__caption-date">{{ photo().takenAt | date: 'MMMM d, y' }}</p>

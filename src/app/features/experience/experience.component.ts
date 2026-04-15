@@ -47,7 +47,7 @@ export class ExperienceComponent {
   companies: Company[] = [
     {
       name: 'Fidelity Investments',
-      location: 'Fort Worth, TX',
+      location: 'One Destiny Way, Westlake, Texas',
       roles: [
         {
           title: 'Full Stack Engineer',

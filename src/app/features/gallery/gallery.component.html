@@ -29,8 +29,5 @@
 </section>
 
 @if (selectedPhoto()) {
-  <app-photo-modal
-    [photo]="selectedPhoto()!"
-    (close)="closeModal()"
-  />
+  <app-photo-modal [photo]="selectedPhoto()!" (close)="closeModal()" />
 }

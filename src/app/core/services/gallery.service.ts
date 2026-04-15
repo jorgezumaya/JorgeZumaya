@@ -29,14 +29,18 @@ export class GalleryService {
       const photos = await Promise.all(
         snap.docs.map(async (d) => {
           const data = d.data() as Omit<Photo, 'id' | 'url' | 'thumbUrl'>;
-          const largePath = data.storagePath.replace('original/', 'large/').replace(/\.(jpg|jpeg|png)$/i, '.webp');
-          const thumbPath = data.storagePath.replace('original/', 'thumb/').replace(/\.(jpg|jpeg|png)$/i, '.webp');
+          const largePath = data.storagePath
+            .replace('original/', 'large/')
+            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
+          const thumbPath = data.storagePath
+            .replace('original/', 'thumb/')
+            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
           const [url, thumbUrl] = await Promise.all([
             getDownloadURL(ref(this.storage, largePath)).catch(() => ''),
             getDownloadURL(ref(this.storage, thumbPath)).catch(() => ''),
           ]);
           return { id: d.id, ...data, url, thumbUrl };
-        })
+        }),
       );
       this.photos.set(photos);
     } finally {

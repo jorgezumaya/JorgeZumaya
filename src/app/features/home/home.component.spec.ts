@@ -28,8 +28,11 @@ describe('HomeComponent', () => {
   });
 
   it('should render links to /work and /contact', () => {
-    const links: NodeListOf<HTMLAnchorElement> = fixture.nativeElement.querySelectorAll('a[routerLink]');
-    const hrefs = Array.from(links).map((a) => a.getAttribute('routerLink') ?? a.getAttribute('ng-reflect-router-link'));
+    const links: NodeListOf<HTMLAnchorElement> =
+      fixture.nativeElement.querySelectorAll('a[routerLink]');
+    const hrefs = Array.from(links).map(
+      (a) => a.getAttribute('routerLink') ?? a.getAttribute('ng-reflect-router-link'),
+    );
     expect(hrefs).toContain('/work');
     expect(hrefs).toContain('/contact');
   });
