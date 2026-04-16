@@ -53,11 +53,6 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build -- --configuration=production
-      - name: Deploy Firestore rules
-        run: |
-          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
-          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only firestore:rules --project jorgezumaya-portfolio
-          rm /tmp/sa.json
       - name: Deploy to production
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
