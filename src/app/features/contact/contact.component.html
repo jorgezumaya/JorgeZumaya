@@ -32,23 +32,61 @@
     </div>
 
     <!-- Right: form -->
-    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
-      <label>
-        Name
-        <input formControlName="name" autocomplete="name" />
-      </label>
-      <label>
-        Email
-        <input type="email" formControlName="email" autocomplete="email" />
-      </label>
-      <label>
-        Subject
-        <input formControlName="subject" />
-      </label>
-      <label>
-        Message
-        <textarea formControlName="message" rows="6"></textarea>
-      </label>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          formControlName="name"
+          autocomplete="name"
+          [class.is-invalid]="fieldError('name')"
+        />
+        @if (fieldError('name'); as err) {
+          <span class="field__error" role="alert">{{ err }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          [class.is-invalid]="fieldError('email')"
+        />
+        @if (fieldError('email'); as err) {
+          <span class="field__error" role="alert">{{ err }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input id="subject" formControlName="subject" [class.is-invalid]="fieldError('subject')" />
+        @if (fieldError('subject'); as err) {
+          <span class="field__error" role="alert">{{ err }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          formControlName="message"
+          rows="6"
+          [class.is-invalid]="fieldError('message')"
+        ></textarea>
+        <div class="field__meta">
+          @if (fieldError('message'); as err) {
+            <span class="field__error" role="alert">{{ err }}</span>
+          } @else {
+            <span></span>
+          }
+          <span class="field__count" [class.field__count--near]="messageLen > MESSAGE_MAX * 0.85">
+            {{ messageLen }}&thinsp;/&thinsp;{{ MESSAGE_MAX }}
+          </span>
+        </div>
+      </div>
 
       <!-- honeypot — hidden from real users -->
       <input
@@ -60,7 +98,7 @@
         autocomplete="off"
       />
 
-      <button type="submit" [disabled]="form.invalid || sending()">
+      <button type="submit" [disabled]="sending()">
         {{ sending() ? 'Sending…' : 'Send message' }}
       </button>
     </form>

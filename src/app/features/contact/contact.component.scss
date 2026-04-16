@@ -97,10 +97,38 @@ h1 {
   gap: var(--space-4);
 }
 
-label {
+.field {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+
+  &__error {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-error, #e05c5c);
+    letter-spacing: 0.03em;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  &__count {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-text-mute);
+    flex-shrink: 0;
+
+    &--near {
+      color: var(--color-error, #e05c5c);
+    }
+  }
+}
+
+label {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.06em;
@@ -124,6 +152,10 @@ textarea {
   &:focus {
     outline: none;
     border-color: var(--color-accent);
+  }
+
+  &.is-invalid {
+    border-color: var(--color-error, #e05c5c);
   }
 }
 
