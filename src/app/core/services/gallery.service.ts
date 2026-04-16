@@ -1,6 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Firestore, collection, query, orderBy, getDocs } from '@angular/fire/firestore';
-import { Storage, ref, getDownloadURL } from '@angular/fire/storage';
+import { Storage, ref, listAll, getDownloadURL } from '@angular/fire/storage';
 
 export interface Photo {
   id: string;
@@ -15,7 +14,6 @@ export interface Photo {
 
 @Injectable({ providedIn: 'root' })
 export class GalleryService {
-  private firestore = inject(Firestore);
   private storage = inject(Storage);
 
   photos = signal<Photo[]>([]);
@@ -24,27 +22,34 @@ export class GalleryService {
   async load(): Promise<void> {
     this.loading.set(true);
     try {
-      const q = query(collection(this.firestore, 'gallery'), orderBy('order', 'asc'));
-      const snap = await getDocs(q);
+      const result = await listAll(ref(this.storage, 'Gallery'));
       const photos = await Promise.all(
-        snap.docs.map(async (d) => {
-          const data = d.data() as Omit<Photo, 'id' | 'url' | 'thumbUrl'>;
-          const largePath = data.storagePath
-            .replace('original/', 'large/')
-            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
-          const thumbPath = data.storagePath
-            .replace('original/', 'thumb/')
-            .replace(/\.(jpg|jpeg|png)$/i, '.webp');
-          const [url, thumbUrl] = await Promise.all([
-            getDownloadURL(ref(this.storage, largePath)).catch(() => ''),
-            getDownloadURL(ref(this.storage, thumbPath)).catch(() => ''),
-          ]);
-          return { id: d.id, ...data, url, thumbUrl };
+        result.items.map(async (item, index) => {
+          const url = await getDownloadURL(item);
+          return {
+            id: item.name,
+            storagePath: item.fullPath,
+            caption: this.formatCaption(item.name),
+            takenAt: new Date(),
+            order: index,
+            tags: [],
+            url,
+            thumbUrl: url,
+          } satisfies Photo;
         }),
       );
       this.photos.set(photos);
     } finally {
       this.loading.set(false);
     }
+  }
+
+  /** "JorgeFidDayPic.jpeg" → "Jorge Fid Day Pic" */
+  private formatCaption(filename: string): string {
+    return filename
+      .replace(/\.(jpe?g|png|webp)$/i, '')
+      .replace(/_/g, ' ')
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .trim();
   }
 }
