@@ -28,6 +28,29 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      - name: Generate environment files
+        run: |
+          mkdir -p src/environments
+          cat > src/environments/environment.ts << 'EOF'
+          function required(value: string | undefined, name: string): string {
+            if (!value) throw new Error(`Missing env var: ${name}`);
+            return value;
+          }
+          export const environment = {
+            production: false,
+            firebase: {
+              apiKey: required(process.env['NG_APP_FIREBASE_API_KEY'], 'NG_APP_FIREBASE_API_KEY'),
+              authDomain: required(process.env['NG_APP_FIREBASE_AUTH_DOMAIN'], 'NG_APP_FIREBASE_AUTH_DOMAIN'),
+              projectId: required(process.env['NG_APP_FIREBASE_PROJECT_ID'], 'NG_APP_FIREBASE_PROJECT_ID'),
+              storageBucket: required(process.env['NG_APP_FIREBASE_STORAGE_BUCKET'], 'NG_APP_FIREBASE_STORAGE_BUCKET'),
+              messagingSenderId: required(process.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID'], 'NG_APP_FIREBASE_MESSAGING_SENDER_ID'),
+              appId: required(process.env['NG_APP_FIREBASE_APP_ID'], 'NG_APP_FIREBASE_APP_ID'),
+              measurementId: required(process.env['NG_APP_FIREBASE_MEASUREMENT_ID'], 'NG_APP_FIREBASE_MEASUREMENT_ID'),
+            },
+            recaptchaSiteKey: process.env['NG_APP_RECAPTCHA_SITE_KEY'] ?? '',
+          };
+          EOF
+          cp src/environments/environment.ts src/environments/environment.prod.ts
       - name: Lint
         run: npm run lint
       - name: Build
