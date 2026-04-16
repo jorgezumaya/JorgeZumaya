@@ -13,7 +13,7 @@ export class ContactComponent {
   private fb = inject(FormBuilder);
   private svc = inject(ContactService);
   sending = signal(false);
-  sent = signal(false);
+  toast = signal<'success' | 'error' | null>(null);
 
   form = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -29,10 +29,17 @@ export class ContactComponent {
     try {
       const { website, ...payload } = this.form.getRawValue();
       await this.svc.submit(payload);
-      this.sent.set(true);
       this.form.reset();
+      this.showToast('success');
+    } catch {
+      this.showToast('error');
     } finally {
       this.sending.set(false);
     }
+  }
+
+  private showToast(type: 'success' | 'error') {
+    this.toast.set(type);
+    setTimeout(() => this.toast.set(null), 4000);
   }
 }
