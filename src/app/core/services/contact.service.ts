@@ -13,10 +13,16 @@ export class ContactService {
   private firestore = inject(Firestore);
 
   async submit(payload: ContactSubmission): Promise<void> {
-    await addDoc(collection(this.firestore, 'contactSubmissions'), {
-      ...payload,
-      createdAt: serverTimestamp(),
-      userAgent: navigator.userAgent,
+    const data = { ...payload, createdAt: serverTimestamp(), userAgent: navigator.userAgent };
+
+    await addDoc(collection(this.firestore, 'contactSubmissions'), data);
+
+    await addDoc(collection(this.firestore, 'mail'), {
+      to: 'jorge.juarez087@gmail.com',
+      message: {
+        subject: `Portfolio contact: ${payload.subject}`,
+        text: `Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`,
+      },
     });
   }
 }
