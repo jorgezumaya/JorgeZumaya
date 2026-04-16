@@ -41,8 +41,8 @@ interface TechCategory {
   styleUrl: './experience.component.scss',
 })
 export class ExperienceComponent {
-  // TODO: update to Firebase Storage URL once resume PDF is uploaded
-  readonly resumeUrl = 'assets/resume.pdf';
+  readonly resumeUrl =
+    'https://firebasestorage.googleapis.com/v0/b/jorgezumaya-portfolio.firebasestorage.app/o/Resume%2FJorgeZumayaResume2026.pdf?alt=media';
 
   companies: Company[] = [
     {
@@ -127,8 +127,23 @@ export class ExperienceComponent {
       label: 'Backend',
       chips: ['Node.js', 'Java', 'CI/CD', 'REST APIs', 'Salesforce Apex/SOQL', 'GraphQL'],
     },
-    { label: 'Cloud / Infra', chips: ['Firebase', 'GCP', 'GitHub Actions','Jenkins', 'Cloudfare'] },
-    { label: 'Tools', chips: ['Git', 'Figma', 'Salesforce', 'Datadog', 'Splunk', 'Version Control', 'Argo CD', 'Postman'] },
+    {
+      label: 'Cloud / Infra',
+      chips: ['Firebase', 'GCP', 'GitHub Actions', 'Jenkins', 'Cloudfare'],
+    },
+    {
+      label: 'Tools',
+      chips: [
+        'Git',
+        'Figma',
+        'Salesforce',
+        'Datadog',
+        'Splunk',
+        'Version Control',
+        'Argo CD',
+        'Postman',
+      ],
+    },
   ];
 
   testimonials: Testimonial[] = [
