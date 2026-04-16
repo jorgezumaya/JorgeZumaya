@@ -32,15 +32,10 @@ export class ContactComponent {
   form = this.fb.nonNullable.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    subject: ['', Validators.required],
+    subject: ['', [Validators.required, noLinks]],
     message: [
       '',
-      [
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(this.MESSAGE_MAX),
-        noLinks,
-      ],
+      [Validators.required, Validators.minLength(10), Validators.maxLength(this.MESSAGE_MAX)],
     ],
     website: [''], // honeypot
   });
@@ -54,9 +49,9 @@ export class ContactComponent {
     if (!ctrl.dirty || ctrl.valid) return null;
     if (ctrl.hasError('required')) return 'This field is required.';
     if (ctrl.hasError('email')) return 'Please enter a valid email address.';
+    if (ctrl.hasError('noLinks')) return 'Links are not permitted in the subject line.';
     if (ctrl.hasError('minlength')) return 'Message must be at least 10 characters.';
     if (ctrl.hasError('maxlength')) return `Message cannot exceed ${this.MESSAGE_MAX} characters.`;
-    if (ctrl.hasError('noLinks')) return 'Links are not permitted in messages.';
     return null;
   }
 
