@@ -7,7 +7,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'work', renderMode: RenderMode.Prerender },
   // Dynamic pages — render on each request (Firebase data required)
   { path: 'gallery', renderMode: RenderMode.Server },
-  { path: 'contact', renderMode: RenderMode.Server },
+  // Contact is a static form — prerender to avoid SSR/Firestore hydration conflict
+  { path: 'contact', renderMode: RenderMode.Prerender },
   // Fallback
   { path: '**', renderMode: RenderMode.Server },
 ];
