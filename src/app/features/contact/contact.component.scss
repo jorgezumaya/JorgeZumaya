@@ -1,7 +1,11 @@
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-16) var(--container-pad);
+  padding: var(--space-8) var(--container-pad);
+
+  @media (min-width: 768px) {
+    padding: var(--space-16) var(--container-pad);
+  }
 }
 
 .layout {
@@ -75,6 +79,10 @@ h1 {
     font-size: 0.82rem;
     color: var(--color-text-mute);
     transition: color var(--dur-fast) var(--ease-out);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
   }
 
   &:hover &__value {
@@ -108,8 +116,10 @@ textarea {
   color: var(--color-text);
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
-  font-size: 0.95rem;
+  // 16px minimum prevents iOS auto-zoom on focus
+  font-size: 1rem;
   transition: border-color var(--dur-fast) var(--ease-out);
+  width: 100%;
 
   &:focus {
     outline: none;

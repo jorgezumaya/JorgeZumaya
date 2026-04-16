@@ -1,11 +1,19 @@
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-16) var(--container-pad);
+  padding: var(--space-8) var(--container-pad);
+
+  @media (min-width: 768px) {
+    padding: var(--space-16) var(--container-pad);
+  }
 }
 
 .page__header {
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-8);
+
+  @media (min-width: 768px) {
+    margin-bottom: var(--space-16);
+  }
 }
 
 .eyebrow {
@@ -86,11 +94,17 @@ h1 {
 
 .timeline__company-header {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
+  flex-direction: column;
+  gap: var(--space-1);
   margin-bottom: var(--space-8);
   padding-bottom: var(--space-4);
   border-bottom: 1px solid var(--color-border);
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
 }
 
 .timeline__company-name {
@@ -115,7 +129,11 @@ h1 {
 .timeline__entry {
   display: grid;
   grid-template-columns: 20px 1fr;
-  gap: 0 var(--space-6);
+  gap: 0 var(--space-4);
+
+  @media (min-width: 480px) {
+    gap: 0 var(--space-6);
+  }
 }
 
 .timeline__entry-marker {

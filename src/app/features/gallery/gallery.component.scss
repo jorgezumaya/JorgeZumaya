@@ -1,7 +1,11 @@
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-16) var(--container-pad);
+  padding: var(--space-8) var(--container-pad);
+
+  @media (min-width: 768px) {
+    padding: var(--space-16) var(--container-pad);
+  }
 }
 
 .page__header {
@@ -119,12 +123,17 @@ h1 {
   flex-direction: column;
   justify-content: flex-end;
   padding: var(--space-4);
-  opacity: 0;
+  // Always visible on touch devices — no hover state available
+  opacity: 1;
   transition: opacity var(--dur-fast) var(--ease-out);
+
+  @media (hover: hover) {
+    // Desktop with a real pointer: hide until hover
+    opacity: 0;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
   }
 }
 

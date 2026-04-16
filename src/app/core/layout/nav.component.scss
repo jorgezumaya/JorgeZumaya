@@ -4,28 +4,34 @@
   z-index: 100;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--space-4) var(--container-pad);
-  background: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(12px);
+  flex-wrap: wrap; // allows mobile links to drop to a second row
+  padding: var(--space-4) var(--container-pad) 0;
+  background: var(--color-bg);
   border-bottom: 1px solid var(--color-border);
+
+  // When open, add bottom padding inside the nav so the links row breathes
+  &--open {
+    padding-bottom: 0;
+  }
 
   &__brand {
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
+    padding-bottom: var(--space-4); // match nav row height
   }
 
+  // ── Shared link list base ────────────────────────────────────
   &__links {
-    display: flex;
-    gap: var(--space-6);
     list-style: none;
 
     a {
-      color: var(--color-text-mute);
       font-family: var(--font-mono);
       font-size: 0.875rem;
       letter-spacing: 0.05em;
+      color: var(--color-text-mute);
       transition: color var(--dur-fast) var(--ease-out);
+
       &:hover,
       &.active {
         color: var(--color-text);
@@ -33,45 +39,121 @@
     }
   }
 
+  // ── Desktop: horizontal row ─────────────────────────────────
+  &__links--desktop {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-left: auto;
+    padding-bottom: var(--space-4);
+  }
+
+  // ── Mobile collapsible links (hidden on desktop) ────────────
+  &__links--mobile {
+    display: none;
+  }
+
+  // ── CTA chip ───────────────────────────────────────────────
   &__cta {
+    display: inline-flex;
+    align-items: center;
     padding: var(--space-2) var(--space-4);
     background: var(--color-accent);
     color: var(--color-bg) !important;
     border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
     font-weight: 500;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
   }
 
+  // Mobile-only Contact CTA (hidden on desktop)
+  &__mobile-cta {
+    display: none;
+  }
+
+  // ── Hamburger ──────────────────────────────────────────────
   &__toggle {
     display: none;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
+    align-items: center;
+    gap: 5px;
+    flex-shrink: 0;
+
     span {
       display: block;
+      width: 22px;
       height: 2px;
+      border-radius: 1px;
       background: var(--color-text);
+      transition:
+        transform var(--dur-fast) var(--ease-out),
+        opacity var(--dur-fast) var(--ease-out);
     }
   }
 
+  // Animate hamburger → X when open
+  &--open &__toggle {
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // ── Mobile (≤ 768px) ────────────────────────────────────────
   @media (max-width: 768px) {
+    // Hide desktop horizontal links
+    &__links--desktop {
+      display: none;
+    }
+
+    // Show mobile Contact + hamburger
+    &__mobile-cta {
+      display: inline-flex;
+      margin-left: auto;
+      margin-right: var(--space-3);
+      margin-bottom: var(--space-4); // align with brand row
+    }
+
     &__toggle {
       display: flex;
+      margin-bottom: var(--space-4); // align with brand row
     }
-    &__links {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      left: 0;
+
+    // Collapsible links — full width, second row via flex-wrap
+    &__links--mobile {
+      display: flex;
       flex-direction: column;
-      padding: var(--space-6) var(--container-pad);
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
-      transform: translateY(-110%);
-      transition: transform var(--dur) var(--ease-out);
+      width: 100%; // forces to its own row (flex-wrap on nav)
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height var(--dur) var(--ease-out);
+      border-top: 1px solid transparent;
+
+      a {
+        display: block;
+        padding: var(--space-4) 0;
+        font-size: 1rem;
+        border-bottom: 1px solid var(--color-border);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
       &.is-open {
-        transform: translateY(0);
+        max-height: 300px;
+        border-top-color: var(--color-border);
+        padding-bottom: var(--space-4);
       }
     }
   }

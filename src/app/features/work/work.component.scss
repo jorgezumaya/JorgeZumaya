@@ -1,7 +1,11 @@
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: var(--space-16) var(--container-pad);
+  padding: var(--space-8) var(--container-pad);
+
+  @media (min-width: 768px) {
+    padding: var(--space-16) var(--container-pad);
+  }
 }
 
 .page__header {

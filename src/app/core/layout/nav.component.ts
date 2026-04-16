@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -6,7 +6,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   template: `
-    <nav class="nav">
+    <nav class="nav" [class.nav--open]="open()">
+      <!-- Brand always visible -->
       <a routerLink="/" class="nav__brand" aria-label="Home">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,27 +33,42 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           </text>
         </svg>
       </a>
-      <button class="nav__toggle" (click)="open.set(!open())" [attr.aria-expanded]="open()">
+
+      <!-- Desktop: inline links -->
+      <ul class="nav__links nav__links--desktop">
+        <li><a routerLink="/experience" routerLinkActive="active">Experience</a></li>
+        <li><a routerLink="/work" routerLinkActive="active">Work</a></li>
+        <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+        <li>
+          <a routerLink="/contact" routerLinkActive="active" class="nav__cta">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Mobile only: Contact CTA + hamburger -->
+      <a
+        routerLink="/contact"
+        routerLinkActive="active"
+        class="nav__cta nav__mobile-cta"
+        (click)="close()"
+        >Contact</a
+      >
+      <button
+        class="nav__toggle"
+        (click)="open.set(!open())"
+        [attr.aria-expanded]="open()"
+        aria-label="Toggle navigation"
+      >
         <span></span><span></span><span></span>
       </button>
-      <ul class="nav__links" [class.is-open]="open()">
+
+      <!-- Mobile collapsible links (in-flow, no fixed/absolute) -->
+      <ul class="nav__links nav__links--mobile" [class.is-open]="open()">
         <li>
-          <a routerLink="/experience" routerLinkActive="active" (click)="open.set(false)"
-            >Experience</a
-          >
+          <a routerLink="/experience" routerLinkActive="active" (click)="close()">Experience</a>
         </li>
-        <li><a routerLink="/work" routerLinkActive="active" (click)="open.set(false)">Work</a></li>
+        <li><a routerLink="/work" routerLinkActive="active" (click)="close()">Work</a></li>
         <li>
-          <a routerLink="/gallery" routerLinkActive="active" (click)="open.set(false)">Gallery</a>
-        </li>
-        <li>
-          <a
-            routerLink="/contact"
-            routerLinkActive="active"
-            (click)="open.set(false)"
-            class="nav__cta"
-            >Contact</a
-          >
+          <a routerLink="/gallery" routerLinkActive="active" (click)="close()">Gallery</a>
         </li>
       </ul>
     </nav>
@@ -61,4 +77,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavComponent {
   open = signal(false);
+  private el = inject(ElementRef);
+
+  close(): void {
+    this.open.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    if (this.open() && !this.el.nativeElement.contains(event.target as Node)) {
+      this.close();
+    }
+  }
 }
