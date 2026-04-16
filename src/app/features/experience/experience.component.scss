@@ -295,7 +295,7 @@ h1 {
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -318,6 +318,53 @@ h1 {
   flex-wrap: wrap;
   gap: var(--space-2);
   list-style: none;
+}
+
+// ── Language chips ─────────────────────────────────────────
+.lang-chips {
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.lang-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px var(--space-2);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+
+  &:hover {
+    border-color: var(--color-accent);
+  }
+
+  &__flag {
+    width: 18px;
+    height: auto;
+    border-radius: 2px;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  &__name {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    flex: 1;
+  }
+
+  &__level {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
 }
 
 // ── Testimonials ───────────────────────────────────────────

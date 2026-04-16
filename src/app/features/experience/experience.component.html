@@ -60,7 +60,7 @@
     </div>
   </div>
 
-  <!-- Tech Stack Chips -->
+  <!-- Tech Stack + Languages -->
   <div class="tech-stack" appReveal>
     <h2 class="section-heading">Tech Stack</h2>
     <div class="tech-stack__grid">
@@ -74,6 +74,20 @@
           </ul>
         </div>
       }
+
+      <!-- Languages category -->
+      <div class="tech-stack__category">
+        <p class="tech-stack__label">Spoken Languages</p>
+        <ul class="tech-stack__chips lang-chips">
+          @for (lang of languages; track lang.name) {
+            <li class="lang-chip">
+              <img [src]="lang.flag" [alt]="lang.name + ' flag'" class="lang-chip__flag" />
+              <span class="lang-chip__name">{{ lang.name }}</span>
+              <span class="lang-chip__level">{{ lang.level }}</span>
+            </li>
+          }
+        </ul>
+      </div>
     </div>
   </div>
 

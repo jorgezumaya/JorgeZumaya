@@ -33,6 +33,12 @@ interface TechCategory {
   chips: string[];
 }
 
+interface Language {
+  name: string;
+  level: string;
+  flag: string;
+}
+
 @Component({
   selector: 'app-experience',
   standalone: true,
@@ -144,6 +150,12 @@ export class ExperienceComponent {
         'Postman',
       ],
     },
+  ];
+
+  languages: Language[] = [
+    { name: 'English', level: 'Professional', flag: 'assets/flags/flag-us.svg' },
+    { name: 'Spanish', level: 'Fluent', flag: 'assets/flags/flag-mx.svg' },
+    { name: 'Portuguese', level: 'Intermediate', flag: 'assets/flags/flag-br.svg' },
   ];
 
   testimonials: Testimonial[] = [

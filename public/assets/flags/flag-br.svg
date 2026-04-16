@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
+  <defs>
+    <clipPath id="br-clip">
+      <rect width="36" height="24" rx="3"/>
+    </clipPath>
+    <clipPath id="br-circle">
+      <circle cx="18" cy="12" r="7"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#br-clip)">
+    <!-- Green background -->
+    <rect width="36" height="24" fill="#009B3A"/>
+    <!-- Yellow diamond -->
+    <polygon points="18,1.8 34.2,12 18,22.2 1.8,12" fill="#FEDF00"/>
+    <!-- Blue circle -->
+    <circle cx="18" cy="12" r="7" fill="#002776"/>
+    <!-- White band (slightly tilted, clipped to circle) -->
+    <rect x="10" y="10.8" width="16" height="2.4" fill="#fff" clip-path="url(#br-circle)"
+          transform="rotate(-10,18,12)"/>
+    <!-- Stars — simplified white dots -->
+    <circle cx="14.5" cy="8.5"  r="0.55" fill="#fff"/>
+    <circle cx="18"   cy="7.5"  r="0.55" fill="#fff"/>
+    <circle cx="21.5" cy="8.5"  r="0.55" fill="#fff"/>
+    <circle cx="13"   cy="11.5" r="0.55" fill="#fff"/>
+    <circle cx="23"   cy="11.5" r="0.55" fill="#fff"/>
+    <circle cx="14.5" cy="14.5" r="0.55" fill="#fff"/>
+    <circle cx="18"   cy="15.5" r="0.55" fill="#fff"/>
+    <circle cx="21.5" cy="14.5" r="0.55" fill="#fff"/>
+    <circle cx="18"   cy="11.5" r="0.4"  fill="#fff"/>
+  </g>
+</svg>

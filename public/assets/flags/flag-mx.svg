@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
+  <defs>
+    <clipPath id="mx-clip">
+      <rect width="36" height="24" rx="3"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#mx-clip)">
+    <!-- Three vertical stripes -->
+    <rect x="0"  width="12" height="24" fill="#006847"/>
+    <rect x="12" width="12" height="24" fill="#fff"/>
+    <rect x="24" width="12" height="24" fill="#CE1126"/>
+    <!-- Coat of arms — simplified eagle on cactus -->
+    <!-- Cactus base / rock -->
+    <ellipse cx="18" cy="17" rx="3" ry="1.2" fill="#8B7A4A" opacity="0.6"/>
+    <!-- Cactus trunk -->
+    <rect x="17.2" y="12" width="1.6" height="5" rx="0.8" fill="#4A7A30"/>
+    <!-- Cactus left arm -->
+    <rect x="14.5" y="13" width="3" height="1.2" rx="0.6" fill="#4A7A30"/>
+    <rect x="14.2" y="11.2" width="1.2" height="2.2" rx="0.6" fill="#4A7A30"/>
+    <!-- Cactus right arm -->
+    <rect x="18.5" y="13" width="3" height="1.2" rx="0.6" fill="#4A7A30"/>
+    <rect x="20.6" y="11.2" width="1.2" height="2.2" rx="0.6" fill="#4A7A30"/>
+    <!-- Eagle body -->
+    <ellipse cx="18" cy="11" rx="2.2" ry="2.6" fill="#4A3520"/>
+    <!-- Eagle head -->
+    <circle cx="18" cy="8.2" r="1.4" fill="#4A3520"/>
+    <!-- Beak -->
+    <path d="M18.8 8.8 L20.1 9.5 L19.5 10.2 Z" fill="#C8A000"/>
+    <!-- Eye -->
+    <circle cx="18.5" cy="7.9" r="0.35" fill="#fff"/>
+    <circle cx="18.5" cy="7.9" r="0.18" fill="#1A1A1A"/>
+    <!-- Left wing -->
+    <path d="M15.8 10.5 Q12.5 8.5 13.5 13 Q15 13.5 16.2 12 Z" fill="#4A3520"/>
+    <!-- Right wing -->
+    <path d="M20.2 10.5 Q23.5 8.5 22.5 13 Q21 13.5 19.8 12 Z" fill="#4A3520"/>
+    <!-- Snake in beak -->
+    <path d="M20 9.8 Q22 10.5 21.5 12.5 Q21 13.5 20 13 Q21 12 20.5 11 Q20 10.2 20 9.8Z" fill="#3A7A1A" opacity="0.9"/>
+  </g>
+</svg>
