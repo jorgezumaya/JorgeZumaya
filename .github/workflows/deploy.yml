@@ -56,7 +56,7 @@ jobs:
       - name: Deploy Firestore rules
         run: |
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
-          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only firestore:rules --project ${{ secrets.FIREBASE_PROJECT_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only firestore:rules --project "$NG_APP_FIREBASE_PROJECT_ID"
           rm /tmp/sa.json
       - name: Deploy to production
         uses: FirebaseExtended/action-hosting-deploy@v0
