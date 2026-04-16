@@ -7,10 +7,6 @@ import { FooterComponent } from './footer.component';
   selector: 'app-shell',
   standalone: true,
   imports: [RouterOutlet, NavComponent, FooterComponent],
-  template: `
-    <app-nav />
-    <main><router-outlet /></main>
-    <app-footer />
-  `,
+  templateUrl: './shell.component.html',
 })
 export class ShellComponent {}

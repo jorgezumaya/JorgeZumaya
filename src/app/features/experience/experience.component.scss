@@ -290,6 +290,10 @@ h1 {
   gap: var(--space-6);
   grid-template-columns: 1fr 1fr;
 
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(4, 1fr);
   }
