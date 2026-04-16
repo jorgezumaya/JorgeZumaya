@@ -122,13 +122,13 @@ export class ExperienceComponent {
   ];
 
   techStack: TechCategory[] = [
-    { label: 'Frontend', chips: ['Angular', 'TypeScript', 'RxJS', 'SCSS', 'HTML'] },
+    { label: 'Frontend', chips: ['Angular', 'TypeScript', 'RxJS', 'SCSS', 'HTML', 'EmberJS'] },
     {
       label: 'Backend',
-      chips: ['Node.js', 'Java', 'Spring Boot', 'REST APIs', 'Salesforce Apex'],
+      chips: ['Node.js', 'Java', 'CI/CD', 'REST APIs', 'Salesforce Apex/SOQL', 'GraphQL'],
     },
-    { label: 'Cloud / Infra', chips: ['Firebase', 'GCP', 'GitHub Actions'] },
-    { label: 'Tools', chips: ['Git', 'Figma', 'Salesforce', 'Datadog', 'Splunk'] },
+    { label: 'Cloud / Infra', chips: ['Firebase', 'GCP', 'GitHub Actions','Jenkins', 'Cloudfare'] },
+    { label: 'Tools', chips: ['Git', 'Figma', 'Salesforce', 'Datadog', 'Splunk', 'Version Control', 'Argo CD', 'Postman'] },
   ];
 
   testimonials: Testimonial[] = [
