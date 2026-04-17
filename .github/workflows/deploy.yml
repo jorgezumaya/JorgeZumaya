@@ -60,7 +60,7 @@ jobs:
       - name: Deploy functions
         run: |
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
-          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only functions --project jorgezumaya-portfolio
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only functions --project jorgezumaya-portfolio --force
           rm /tmp/sa.json
       - name: Deploy to production
         uses: FirebaseExtended/action-hosting-deploy@v0
