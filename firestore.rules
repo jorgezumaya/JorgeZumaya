@@ -8,15 +8,14 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Contact submissions: create-only, no read, with schema validation
+    // Contact submissions: create-only, no read
     match /contactSubmissions/{docId} {
       allow read, update, delete: if false;
       allow create: if
-        request.resource.data.keys().hasOnly(['name','email','subject','message','createdAt','userAgent']) &&
-        request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() < 120 &&
-        request.resource.data.email is string && request.resource.data.email.matches('^[^@]+@[^@]+\\.[^@]+$') &&
-        request.resource.data.subject is string && request.resource.data.subject.size() > 0 && request.resource.data.subject.size() < 200 &&
-        request.resource.data.message is string && request.resource.data.message.size() >= 10 && request.resource.data.message.size() < 5000;
+        request.resource.data.name is string && request.resource.data.name.size() > 0 &&
+        request.resource.data.email is string && request.resource.data.email.size() > 0 &&
+        request.resource.data.subject is string && request.resource.data.subject.size() > 0 &&
+        request.resource.data.message is string && request.resource.data.message.size() >= 10;
     }
 
     // Mail queue: client can create (extension reads server-side), never read/edit/delete

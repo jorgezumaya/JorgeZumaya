@@ -68,7 +68,8 @@ export class ContactComponent {
       await this.svc.submit(payload);
       this.form.reset();
       this.showToast('success');
-    } catch {
+    } catch (err) {
+      console.error('[contact] error:', err);
       this.showToast('error');
     } finally {
       this.sending.set(false);
