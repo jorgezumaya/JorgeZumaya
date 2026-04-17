@@ -14,17 +14,37 @@ const URL_RE = /https?:\/\/[^\s]+|www\.[^\s]+/gi;
 export class ContactService {
   private firestore = inject(Firestore);
 
+  private withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+    return Promise.race([
+      promise,
+      new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error(`[contact] ${label} timed out after ${ms}ms`)), ms),
+      ),
+    ]);
+  }
+
   async submit(payload: ContactSubmission): Promise<void> {
     const data = { ...payload, createdAt: serverTimestamp(), userAgent: navigator.userAgent };
-    await addDoc(collection(this.firestore, 'contactSubmissions'), data);
-    await addDoc(collection(this.firestore, 'mail'), {
-      to: 'jorge.juarez087@gmail.com',
-      message: {
-        subject: `Portfolio contact: ${payload.subject}`,
-        text: this.buildPlainText(payload),
-        html: this.buildHtml(payload),
-      },
-    });
+    console.log('[contact] writing contactSubmissions...');
+    await this.withTimeout(
+      addDoc(collection(this.firestore, 'contactSubmissions'), data),
+      10_000,
+      'contactSubmissions write',
+    );
+    console.log('[contact] writing mail...');
+    await this.withTimeout(
+      addDoc(collection(this.firestore, 'mail'), {
+        to: 'jorge.juarez087@gmail.com',
+        message: {
+          subject: `Portfolio contact: ${payload.subject}`,
+          text: this.buildPlainText(payload),
+          html: this.buildHtml(payload),
+        },
+      }),
+      10_000,
+      'mail write',
+    );
+    console.log('[contact] done');
   }
 
   private extractUrls(text: string): string[] {
