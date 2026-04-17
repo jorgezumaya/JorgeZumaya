@@ -53,6 +53,15 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build -- --configuration=production
+      - name: Install function dependencies
+        run: npm ci --prefix functions
+      - name: Build functions
+        run: npm run build --prefix functions
+      - name: Deploy functions
+        run: |
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > /tmp/sa.json
+          GOOGLE_APPLICATION_CREDENTIALS=/tmp/sa.json npx firebase deploy --only functions --project jorgezumaya-portfolio
+          rm /tmp/sa.json
       - name: Deploy to production
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

@@ -3,8 +3,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { initializeFirestore, memoryLocalCache, provideFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
 import { routes } from './app.routes';
@@ -18,7 +17,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => initializeFirestore(getApp(), { localCache: memoryLocalCache() })),
     provideStorage(() => getStorage()),
   ],
 };

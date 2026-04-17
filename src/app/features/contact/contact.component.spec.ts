@@ -62,6 +62,6 @@ describe('ContactComponent', () => {
       subject: 'Hello',
       message: 'This is a test message.',
     });
-    expect(component.sent()).toBe(true);
+    expect(component.toast()).toBe('success');
   });
 });

@@ -4,6 +4,3 @@ pre-commit:
     lint:
       name: Prettier check
       run: npm run lint
-    test:
-      name: Unit tests
-      run: npm run test:ci

@@ -2,7 +2,13 @@
   "hosting": {
     "public": "dist/JorgeZumaya/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [{ "source": "**", "destination": "/index.html" }],
+    "rewrites": [
+      {
+        "source": "/api/contact",
+        "function": { "functionId": "submitContact", "region": "us-east1" }
+      },
+      { "source": "**", "destination": "/index.html" }
+    ],
     "headers": [
       {
         "source": "**/*.@(js|css|woff2|svg|webp|jpg|png)",

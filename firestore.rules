@@ -8,22 +8,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Contact submissions: create-only, no read
-    match /contactSubmissions/{docId} {
-      allow read, update, delete: if false;
-      allow create: if
-        request.resource.data.name is string && request.resource.data.name.size() > 0 &&
-        request.resource.data.email is string && request.resource.data.email.size() > 0 &&
-        request.resource.data.subject is string && request.resource.data.subject.size() > 0 &&
-        request.resource.data.message is string && request.resource.data.message.size() >= 10;
-    }
-
-    // Mail queue: client can create (extension reads server-side), never read/edit/delete
-    match /mail/{docId} {
-      allow create: if true;
-      allow read, update, delete: if false;
-    }
-
+    // Everything else is written server-side via Cloud Function (admin SDK bypasses rules)
     match /{document=**} {
       allow read, write: if false;
     }
