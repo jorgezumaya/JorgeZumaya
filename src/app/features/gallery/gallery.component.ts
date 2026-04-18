@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { GalleryService, Photo } from '../../core/services/gallery.service';
 import { PhotoModalComponent } from './photo-modal.component';
 import { RevealDirective } from '../../core/directives/reveal.directive';
@@ -13,9 +14,12 @@ import { RevealDirective } from '../../core/directives/reveal.directive';
 export class GalleryComponent implements OnInit {
   svc = inject(GalleryService);
   selectedPhoto = signal<Photo | null>(null);
+  private platformId = inject(PLATFORM_ID);
 
   ngOnInit(): void {
-    this.svc.load();
+    if (isPlatformBrowser(this.platformId)) {
+      this.svc.load();
+    }
   }
 
   open(photo: Photo): void {
