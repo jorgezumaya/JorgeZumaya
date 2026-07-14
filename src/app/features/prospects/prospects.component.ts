@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, PLATFORM_ID, afterNextRender, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
-type Lang = 'en' | 'es';
+type Lang = 'en' | 'es' | 'pt';
 
 const FONT_LINK_ID = 'app-prospects-fonts';
 const TILE_SIZE = 74;
@@ -51,9 +51,10 @@ export class ProspectsComponent implements OnDestroy {
       const val = el.getAttribute(`data-${lang}`);
       if (val !== null) el.innerHTML = val;
     });
-    this.host.querySelector('#btn-en')?.classList.toggle('active', lang === 'en');
-    this.host.querySelector('#btn-es')?.classList.toggle('active', lang === 'es');
-    document.documentElement.lang = lang;
+    (['en', 'es', 'pt'] as const).forEach((l) => {
+      this.host.querySelector(`#btn-${l}`)?.classList.toggle('active', lang === l);
+    });
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
   }
 
   private loadFonts(): void {

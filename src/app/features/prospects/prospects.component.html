@@ -9,9 +9,10 @@
     </svg>
     <span class="logo-word">JORGE<i>.</i></span>
   </a>
-  <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+  <div class="lang-toggle" role="group" aria-label="Language / Idioma / Língua">
     <button id="btn-en" class="active" (click)="setLang('en')">EN</button>
     <button id="btn-es" (click)="setLang('es')">ES</button>
+    <button id="btn-pt" (click)="setLang('pt')">PT</button>
   </div>
 </nav>
 
@@ -20,23 +21,28 @@
   <div class="hero-inner">
     <div class="hero-badge">
       <span class="dot"></span
-      ><span data-en="Fort Worth, TX · English / Español" data-es="Fort Worth, TX · English / Español"
-        >Fort Worth, TX · English / Español</span
+      ><span
+        data-en="Fort Worth, TX · English / Español / Português"
+        data-es="Fort Worth, TX · English / Español / Português"
+        data-pt="Fort Worth, TX · English / Español / Português"
+        >Fort Worth, TX · English / Español / Português</span
       >
     </div>
     <h1
       data-en='More calls. More customers. A website that <span class="red">earns its keep.</span>'
       data-es='Más llamadas. Más clientes. Un sitio web que <span class="red">se paga solo.</span>'
+      data-pt='Mais ligações. Mais clientes. Um site que <span class="red">se paga sozinho.</span>'
     >
       More calls. More customers. A website that <span class="red">earns its keep.</span>
     </h1>
     <p
       class="lede"
-      data-en="I build fast, professional websites for contractors, shops, and local businesses across DFW. In English, Spanish, or both. No agency runaround. You deal directly with the person writing the code."
-      data-es="Construyo sitios web rápidos y profesionales para contratistas, tiendas y negocios locales en todo el DFW. En inglés, español o ambos. Sin vueltas de agencia. Usted trata directamente con la persona que escribe el código."
+      data-en="I build fast, professional websites for contractors, shops, and local businesses across DFW. In English, Spanish, or Portuguese. No agency runaround. You deal directly with the person writing the code."
+      data-es="Construyo sitios web rápidos y profesionales para contratistas, tiendas y negocios locales en todo el DFW. En inglés, español o portugués. Sin vueltas de agencia. Usted trata directamente con la persona que escribe el código."
+      data-pt="Construo sites rápidos e profissionais para empreiteiros, lojas e negócios locais em todo o DFW. Em inglês, espanhol ou português. Sem enrolação de agência. Você fala direto com a pessoa que escreve o código."
     >
       I build fast, professional websites for contractors, shops, and local businesses across DFW. In English,
-      Spanish, or both. No agency runaround. You deal directly with the person writing the code.
+      Spanish, or Portuguese. No agency runaround. You deal directly with the person writing the code.
     </p>
     <div class="hero-cta">
       <a
@@ -45,6 +51,7 @@
         (click)="scrollToSection($event, 'contact')"
         data-en="Get a free quote"
         data-es="Cotización gratis"
+        data-pt="Obtenha um orçamento grátis"
         >Get a free quote</a
       >
       <a
@@ -53,6 +60,7 @@
         (click)="scrollToSection($event, 'work')"
         data-en="See my work"
         data-es="Ver mi trabajo"
+        data-pt="Ver meu trabalho"
         >See my work</a
       >
     </div>
@@ -61,16 +69,23 @@
 
 <section id="process">
   <div class="section-head">
-    <div class="mono" data-en="How it works" data-es="Cómo funciona">How it works</div>
-    <h2 data-en="Live in weeks, not months" data-es="En línea en semanas, no meses">Live in weeks, not months</h2>
+    <div class="mono" data-en="How it works" data-es="Cómo funciona" data-pt="Como funciona">How it works</div>
+    <h2
+      data-en="Live in weeks, not months"
+      data-es="En línea en semanas, no meses"
+      data-pt="No ar em semanas, não meses"
+    >
+      Live in weeks, not months
+    </h2>
   </div>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
-      <h3 data-en="We talk" data-es="Hablamos">We talk</h3>
+      <h3 data-en="We talk" data-es="Hablamos" data-pt="Conversamos">We talk</h3>
       <p
         data-en="A free 15 minute call. You tell me about your business, I tell you exactly what I would build and what it costs. No pressure, no jargon."
         data-es="Una llamada gratis de 15 minutos. Usted me cuenta de su negocio, yo le digo exactamente qué construiría y cuánto cuesta. Sin presión, sin tecnicismos."
+        data-pt="Uma ligação grátis de 15 minutos. Você me conta sobre o seu negócio, eu te digo exatamente o que eu criaria e quanto custa. Sem pressão, sem jargão."
       >
         A free 15 minute call. You tell me about your business, I tell you exactly what I would build and what it
         costs. No pressure, no jargon.
@@ -78,10 +93,11 @@
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <h3 data-en="I build" data-es="Yo construyo">I build</h3>
+      <h3 data-en="I build" data-es="Yo construyo" data-pt="Eu construo">I build</h3>
       <p
         data-en="You see progress along the way and get two rounds of revisions included. Nothing goes live until you love it."
         data-es="Usted ve el avance en el camino y tiene dos rondas de revisiones incluidas. Nada se publica hasta que le encante."
+        data-pt="Você acompanha o progresso e tem duas rodadas de revisões incluídas. Nada vai ao ar até você adorar."
       >
         You see progress along the way and get two rounds of revisions included. Nothing goes live until you love
         it.
@@ -89,10 +105,11 @@
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <h3 data-en="You launch" data-es="Usted lanza">You launch</h3>
+      <h3 data-en="You launch" data-es="Usted lanza" data-pt="Você lança">You launch</h3>
       <p
         data-en="Your site goes live, set up to show up on Google and ready for customers on any phone. I stay available after launch."
         data-es="Su sitio se publica, configurado para aparecer en Google y listo para clientes en cualquier celular. Sigo disponible después del lanzamiento."
+        data-pt="Seu site vai ao ar, configurado para aparecer no Google e pronto para clientes em qualquer celular. Fico disponível depois do lançamento."
       >
         Your site goes live, set up to show up on Google and ready for customers on any phone. I stay available
         after launch.
@@ -103,68 +120,101 @@
 
 <section id="services">
   <div class="section-head">
-    <div class="mono" data-en="Services and pricing" data-es="Servicios y precios">Services and pricing</div>
-    <h2 data-en="Straight prices. No surprises." data-es="Precios directos. Sin sorpresas.">
+    <div class="mono" data-en="Services and pricing" data-es="Servicios y precios" data-pt="Serviços e preços">
+      Services and pricing
+    </div>
+    <h2
+      data-en="Straight prices. No surprises."
+      data-es="Precios directos. Sin sorpresas."
+      data-pt="Preços diretos. Sem surpresas."
+    >
       Straight prices. No surprises.
     </h2>
   </div>
   <div class="services-grid">
     <div class="service-card">
-      <div class="mono" data-en="Most popular" data-es="Más solicitado">Most popular</div>
-      <h3 data-en="Business Website" data-es="Sitio de negocio">Business Website</h3>
+      <div class="mono" data-en="Most popular" data-es="Más solicitado" data-pt="Mais popular">Most popular</div>
+      <h3 data-en="Business Website" data-es="Sitio de negocio" data-pt="Site de negócio">Business Website</h3>
       <p
         data-en="Up to 5 pages: home, services, about, gallery, contact. Built to load fast, look sharp on every phone, and turn visitors into phone calls."
         data-es="Hasta 5 páginas: inicio, servicios, nosotros, galería, contacto. Hecho para cargar rápido, verse impecable en cualquier celular y convertir visitas en llamadas."
+        data-pt="Até 5 páginas: início, serviços, sobre, galeria, contato. Feito para carregar rápido, ter boa aparência em qualquer celular e transformar visitas em ligações."
       >
         Up to 5 pages: home, services, about, gallery, contact. Built to load fast, look sharp on every phone, and
         turn visitors into phone calls.
       </p>
-      <div class="price"><em data-en="From" data-es="Desde">From</em> $1,500</div>
+      <div class="price"><em data-en="From" data-es="Desde" data-pt="A partir de">From</em> $1,500</div>
     </div>
     <div class="service-card hot">
-      <div class="mono" data-en="Best value" data-es="Mejor valor">Best value</div>
-      <h3 data-en="Bilingual Site (EN/ES)" data-es="Sitio bilingüe (EN/ES)">Bilingual Site (EN/ES)</h3>
-      <p
-        data-en="Everything in the business website, fully written in English and Spanish. Real translation by a native speaker, not Google Translate. Reach every customer in DFW, including the ones your competitors can't talk to."
-        data-es="Todo lo del sitio de negocio, escrito completamente en inglés y español. Traducción real de un hablante nativo, no Google Translate. Llegue a todos sus clientes en el DFW, incluyendo a los que su competencia no puede atender."
+      <div class="mono" data-en="Best value" data-es="Mejor valor" data-pt="Melhor custo-benefício">Best value</div>
+      <h3
+        data-en="Multilingual Site (EN/ES/PT)"
+        data-es="Sitio multilingüe (EN/ES/PT)"
+        data-pt="Site Multilíngue (EN/ES/PT)"
       >
-        Everything in the business website, fully written in English and Spanish. Real translation by a native
-        speaker, not Google Translate. Reach every customer in DFW, including the ones your competitors can't talk
-        to.
+        Multilingual Site (EN/ES/PT)
+      </h3>
+      <p
+        data-en="Everything in the business website, fully written in English, Spanish, and Portuguese. Real translation by a native speaker, not Google Translate. Reach every customer in DFW, including the ones your competitors can't talk to."
+        data-es="Todo lo del sitio de negocio, escrito completamente en inglés, español y portugués. Traducción real de un hablante nativo, no Google Translate. Llegue a todos sus clientes en el DFW, incluyendo a los que su competencia no puede atender."
+        data-pt="Tudo do site de negócio, escrito completamente em inglês, espanhol e português. Tradução real por um falante nativo, não o Google Translate. Alcance todos os clientes no DFW, incluindo os que seus concorrentes não conseguem atender."
+      >
+        Everything in the business website, fully written in English, Spanish, and Portuguese. Real translation by a
+        native speaker, not Google Translate. Reach every customer in DFW, including the ones your competitors can't
+        talk to.
       </p>
-      <div class="price"><em data-en="From" data-es="Desde">From</em> $2,500</div>
+      <div class="price"><em data-en="From" data-es="Desde" data-pt="A partir de">From</em> $2,500</div>
     </div>
     <div class="service-card">
-      <div class="mono" data-en="Custom" data-es="A la medida">Custom</div>
-      <h3 data-en="Booking and Custom Builds" data-es="Reservas y proyectos a la medida">Booking and Custom Builds</h3>
+      <div class="mono" data-en="Custom" data-es="A la medida" data-pt="Personalizado">Custom</div>
+      <h3
+        data-en="Booking and Custom Builds"
+        data-es="Reservas y proyectos a la medida"
+        data-pt="Reservas e Projetos Personalizados"
+      >
+        Booking and Custom Builds
+      </h3>
       <p
         data-en="Online booking, quote request forms, photo galleries, customer portals. Built with the same enterprise technology I use as a software engineer by day."
         data-es="Reservas en línea, formularios de cotización, galerías de fotos, portales de clientes. Construido con la misma tecnología empresarial que uso como ingeniero de software de día."
+        data-pt="Reservas online, formulários de orçamento, galerias de fotos, portais de clientes. Construído com a mesma tecnologia empresarial que uso como engenheiro de software no dia a dia."
       >
         Online booking, quote request forms, photo galleries, customer portals. Built with the same enterprise
         technology I use as a software engineer by day.
       </p>
-      <div class="price"><em data-en="From" data-es="Desde">From</em> $3,500</div>
+      <div class="price"><em data-en="From" data-es="Desde" data-pt="A partir de">From</em> $3,500</div>
     </div>
   </div>
 </section>
 
 <section id="work">
   <div class="section-head">
-    <div class="mono" data-en="Featured work" data-es="Trabajo destacado">Featured work</div>
+    <div class="mono" data-en="Featured work" data-es="Trabajo destacado" data-pt="Trabalho em destaque">
+      Featured work
+    </div>
     <h2>Avila Contracting</h2>
   </div>
   <div class="work-panel">
     <div>
-      <div class="mono" data-en="Tile contractor · Fort Worth, TX" data-es="Contratista de azulejo · Fort Worth, TX">
+      <div
+        class="mono"
+        data-en="Tile contractor · Fort Worth, TX"
+        data-es="Contratista de azulejo · Fort Worth, TX"
+        data-pt="Empreiteiro de azulejo · Fort Worth, TX"
+      >
         Tile contractor · Fort Worth, TX
       </div>
-      <h3 data-en="A modern site for a family tile business" data-es="Un sitio moderno para un negocio familiar de azulejo">
+      <h3
+        data-en="A modern site for a family tile business"
+        data-es="Un sitio moderno para un negocio familiar de azulejo"
+        data-pt="Um site moderno para um negócio familiar de azulejo"
+      >
         A modern site for a family tile business
       </h3>
       <p
         data-en="Complete redesign with a custom brand identity, project gallery, and quote request form. Built to load fast on any phone, because that is where customers are searching."
         data-es="Rediseño completo con identidad de marca propia, galería de proyectos y formulario de cotización. Hecho para cargar rápido en cualquier celular, porque ahí es donde buscan los clientes."
+        data-pt="Redesign completo com identidade de marca personalizada, galeria de projetos e formulário de orçamento. Feito para carregar rápido em qualquer celular, porque é lá que os clientes estão pesquisando."
       >
         Complete redesign with a custom brand identity, project gallery, and quote request form. Built to load fast
         on any phone, because that is where customers are searching.
@@ -176,6 +226,7 @@
         rel="noopener"
         data-en="Visit the live site"
         data-es="Visitar el sitio en vivo"
+        data-pt="Visitar o site"
         >Visit the live site</a
       >
     </div>
@@ -186,50 +237,80 @@
 <section id="bilingual">
   <div class="split">
     <div>
-      <div class="mono" data-en="Why bilingual wins" data-es="Por qué lo bilingüe gana">Why bilingual wins</div>
-      <h2
-        data-en="Your customers speak two languages. Your website should too."
-        data-es="Sus clientes hablan dos idiomas. Su sitio web también debería."
+      <div
+        class="mono"
+        data-en="Why multilingual wins"
+        data-es="Por qué lo multilingüe gana"
+        data-pt="Por que multilíngue vence"
       >
-        Your customers speak two languages. Your website should too.
+        Why multilingual wins
+      </div>
+      <h2
+        data-en="Your customers speak more than one language. Your website should too."
+        data-es="Sus clientes hablan más de un idioma. Su sitio web también debería."
+        data-pt="Seus clientes falam mais de um idioma. Seu site também deveria."
+      >
+        Your customers speak more than one language. Your website should too.
       </h2>
       <p
-        data-en="Nearly half of the DFW metro speaks Spanish at home. A bilingual site is not a nice extra. It is how you win the customers your competitors cannot even talk to."
-        data-es="Casi la mitad del área metropolitana del DFW habla español en casa. Un sitio bilingüe no es un lujo. Es cómo usted gana los clientes que su competencia ni siquiera puede atender."
+        data-en="The DFW metro has one of the largest Spanish and Portuguese-speaking communities in Texas. A multilingual site is not a nice extra. It is how you win the customers your competitors cannot even talk to."
+        data-es="El área metropolitana del DFW tiene una de las comunidades hispanohablantes y lusohablantes más grandes de Texas. Un sitio multilingüe no es un lujo. Es cómo usted gana los clientes que su competencia ni siquiera puede atender."
+        data-pt="O DFW tem uma das maiores comunidades de falantes de espanhol e português do Texas. Um site multilíngue não é luxo. É como você ganha os clientes que seus concorrentes nem conseguem atender."
       >
-        Nearly half of the DFW metro speaks Spanish at home. A bilingual site is not a nice extra. It is how you win
-        the customers your competitors cannot even talk to.
+        The DFW metro has one of the largest Spanish and Portuguese-speaking communities in Texas. A multilingual
+        site is not a nice extra. It is how you win the customers your competitors cannot even talk to.
       </p>
       <p
-        data-en="Proof? This page is bilingual. Tap the ES button at the top and watch the whole site switch. That is exactly what your customers will get."
-        data-es="¿Prueba? Esta página es bilingüe. Toque el botón EN arriba y vea cómo todo el sitio cambia. Eso es exactamente lo que sus clientes tendrán."
+        data-en="Proof? This page is multilingual. Tap ES or PT at the top and watch the whole site switch. That is exactly what your customers will get."
+        data-es="¿Prueba? Esta página es multilingüe. Toque ES o PT arriba y vea cómo todo el sitio cambia. Eso es exactamente lo que sus clientes tendrán."
+        data-pt="Prova? Esta página muda de idioma. Toque em EN ou ES acima e veja o site inteiro mudar. É exatamente o que seus clientes terão."
       >
-        Proof? This page is bilingual. Tap the ES button at the top and watch the whole site switch. That is exactly
+        Proof? This page is multilingual. Tap ES or PT at the top and watch the whole site switch. That is exactly
         what your customers will get.
       </p>
     </div>
     <div class="stat-tiles">
       <div class="stat-tile">
-        <div class="big">EN + ES</div>
-        <div class="label" data-en="Native fluency in both languages" data-es="Fluidez nativa en ambos idiomas">
-          Native fluency in both languages
+        <div class="big">EN + ES + PT</div>
+        <div
+          class="label"
+          data-en="Native fluency in all three languages"
+          data-es="Fluidez nativa en los tres idiomas"
+          data-pt="Fluência nativa nas três línguas"
+        >
+          Native fluency in all three languages
         </div>
       </div>
       <div class="stat-tile">
-        <div class="big" data-en="1 person" data-es="1 persona">1 person</div>
-        <div class="label" data-en="You always talk to the developer" data-es="Siempre habla con el desarrollador">
+        <div class="big" data-en="1 person" data-es="1 persona" data-pt="1 pessoa">1 person</div>
+        <div
+          class="label"
+          data-en="You always talk to the developer"
+          data-es="Siempre habla con el desarrollador"
+          data-pt="Você sempre fala com o desenvolvedor"
+        >
           You always talk to the developer
         </div>
       </div>
       <div class="stat-tile">
         <div class="big">100%</div>
-        <div class="label" data-en="Mobile friendly, every project" data-es="Optimizado para celular, cada proyecto">
+        <div
+          class="label"
+          data-en="Mobile friendly, every project"
+          data-es="Optimizado para celular, cada proyecto"
+          data-pt="Otimizado para celular, todo projeto"
+        >
           Mobile friendly, every project
         </div>
       </div>
       <div class="stat-tile">
-        <div class="big" data-en="Local" data-es="Local">Local</div>
-        <div class="label" data-en="Based in Fort Worth, TX" data-es="Ubicado en Fort Worth, TX">
+        <div class="big" data-en="Local" data-es="Local" data-pt="Local">Local</div>
+        <div
+          class="label"
+          data-en="Based in Fort Worth, TX"
+          data-es="Ubicado en Fort Worth, TX"
+          data-pt="Baseado em Fort Worth, TX"
+        >
           Based in Fort Worth, TX
         </div>
       </div>
@@ -239,39 +320,77 @@
 
 <section id="maintenance">
   <div class="section-head">
-    <div class="mono" data-en="After launch" data-es="Después del lanzamiento">After launch</div>
-    <h2 data-en="I don't disappear when the site goes live" data-es="No desaparezco cuando el sitio se publica">
+    <div class="mono" data-en="After launch" data-es="Después del lanzamiento" data-pt="Após o lançamento">
+      After launch
+    </div>
+    <h2
+      data-en="I don't disappear when the site goes live"
+      data-es="No desaparezco cuando el sitio se publica"
+      data-pt="Não desapareço quando o site vai ao ar"
+    >
       I don't disappear when the site goes live
     </h2>
   </div>
   <div class="plans">
     <div class="plan">
-      <h3 data-en="Essential Care" data-es="Cuidado esencial">Essential Care</h3>
-      <div class="price">$75<small data-en="per month" data-es="por mes">per month</small></div>
+      <h3 data-en="Essential Care" data-es="Cuidado esencial" data-pt="Cuidado Essencial">Essential Care</h3>
+      <div class="price">$75<small data-en="per month" data-es="por mes" data-pt="por mês">per month</small></div>
       <ul>
-        <li data-en="Hosting and domain management" data-es="Hospedaje y manejo de dominio">
+        <li
+          data-en="Hosting and domain management"
+          data-es="Hospedaje y manejo de dominio"
+          data-pt="Hospedagem e gestão de domínio"
+        >
           Hosting and domain management
         </li>
-        <li data-en="Security updates and backups" data-es="Actualizaciones de seguridad y respaldos">
+        <li
+          data-en="Security updates and backups"
+          data-es="Actualizaciones de seguridad y respaldos"
+          data-pt="Atualizações de segurança e backups"
+        >
           Security updates and backups
         </li>
-        <li data-en="1 content change per month" data-es="1 cambio de contenido al mes">1 content change per month</li>
-        <li data-en="Email support" data-es="Soporte por correo">Email support</li>
+        <li
+          data-en="1 content change per month"
+          data-es="1 cambio de contenido al mes"
+          data-pt="1 alteração de conteúdo por mês"
+        >
+          1 content change per month
+        </li>
+        <li data-en="Email support" data-es="Soporte por correo" data-pt="Suporte por e-mail">Email support</li>
       </ul>
     </div>
     <div class="plan featured">
-      <div class="mono" data-en="Recommended" data-es="Recomendado">Recommended</div>
-      <h3 data-en="Growth Care" data-es="Cuidado de crecimiento">Growth Care</h3>
-      <div class="price">$150<small data-en="per month" data-es="por mes">per month</small></div>
+      <div class="mono" data-en="Recommended" data-es="Recomendado" data-pt="Recomendado">Recommended</div>
+      <h3 data-en="Growth Care" data-es="Cuidado de crecimiento" data-pt="Cuidado de Crescimento">Growth Care</h3>
+      <div class="price">$150<small data-en="per month" data-es="por mes" data-pt="por mês">per month</small></div>
       <ul>
-        <li data-en="Everything in Essential Care" data-es="Todo lo del plan esencial">Everything in Essential Care</li>
-        <li data-en="Up to 4 content changes per month" data-es="Hasta 4 cambios de contenido al mes">
+        <li
+          data-en="Everything in Essential Care"
+          data-es="Todo lo del plan esencial"
+          data-pt="Tudo do plano essencial"
+        >
+          Everything in Essential Care
+        </li>
+        <li
+          data-en="Up to 4 content changes per month"
+          data-es="Hasta 4 cambios de contenido al mes"
+          data-pt="Até 4 alterações de conteúdo por mês"
+        >
           Up to 4 content changes per month
         </li>
-        <li data-en="Priority response, same day" data-es="Respuesta prioritaria el mismo día">
+        <li
+          data-en="Priority response, same day"
+          data-es="Respuesta prioritaria el mismo día"
+          data-pt="Resposta prioritária no mesmo dia"
+        >
           Priority response, same day
         </li>
-        <li data-en="Monthly performance check" data-es="Revisión mensual de rendimiento">
+        <li
+          data-en="Monthly performance check"
+          data-es="Revisión mensual de rendimiento"
+          data-pt="Revisão mensal de desempenho"
+        >
           Monthly performance check
         </li>
       </ul>
@@ -281,20 +400,37 @@
 
 <section id="contact">
   <div class="contact-panel">
-    <div class="mono" data-en="Get started" data-es="Empiece hoy">Get started</div>
-    <h2 data-en="Ready when you are" data-es="Listo cuando usted lo esté">Ready when you are</h2>
+    <div class="mono" data-en="Get started" data-es="Empiece hoy" data-pt="Comece hoje">Get started</div>
+    <h2
+      data-en="Ready when you are"
+      data-es="Listo cuando usted lo esté"
+      data-pt="Pronto quando você estiver"
+    >
+      Ready when you are
+    </h2>
     <p
       data-en="Free 15 minute call, no pressure. Tell me what you do and I will tell you exactly what a website can do for your business, and what it will cost."
       data-es="Llamada gratis de 15 minutos, sin compromiso. Cuénteme a qué se dedica y le diré exactamente qué puede hacer un sitio web por su negocio, y cuánto costará."
+      data-pt="Ligação grátis de 15 minutos, sem compromisso. Me conte o que você faz e eu te digo exatamente o que um site pode fazer pelo seu negócio, e quanto vai custar."
     >
       Free 15 minute call, no pressure. Tell me what you do and I will tell you exactly what a website can do for
       your business, and what it will cost.
     </p>
     <div class="contact-methods">
-      <a class="btn btn-red" href="mailto:jorge.juarez087@gmail.com" data-en="Email me" data-es="Envíeme un correo"
+      <a
+        class="btn btn-red"
+        href="mailto:jorge.juarez087@gmail.com"
+        data-en="Email me"
+        data-es="Envíeme un correo"
+        data-pt="Me mande um e-mail"
         >Email me</a
       >
-      <a class="btn btn-line" href="tel:+18178225269" data-en="Call or text" data-es="Llame o mande texto"
+      <a
+        class="btn btn-line"
+        href="tel:+18178225269"
+        data-en="Call or text"
+        data-es="Llame o mande texto"
+        data-pt="Ligue ou mande mensagem"
         >Call or text</a
       >
     </div>
@@ -312,7 +448,11 @@
     </svg>
     <span class="logo-word" style="font-size: 1rem">JORGE<i>.</i></span>
   </a>
-  <p data-en="Fort Worth, Texas. Websites in English y español." data-es="Fort Worth, Texas. Sitios web en inglés y en español.">
-    Fort Worth, Texas. Websites in English y español.
+  <p
+    data-en="Fort Worth, Texas. Websites in English, español, and Português."
+    data-es="Fort Worth, Texas. Sitios web en inglés, español y portugués."
+    data-pt="Fort Worth, Texas. Sites em inglês, espanhol e português."
+  >
+    Fort Worth, Texas. Websites in English, español, and Português.
   </p>
 </footer>
