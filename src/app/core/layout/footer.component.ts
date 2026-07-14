@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SOCIAL_LINKS } from '../../shared/constants';
 
 @Component({
   selector: 'app-footer',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   year = new Date().getFullYear();
+  readonly social = SOCIAL_LINKS;
 }

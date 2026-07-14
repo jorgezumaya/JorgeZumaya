@@ -1,9 +1,11 @@
+@use '../../../styles/breakpoints' as bp;
+
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-8) var(--container-pad);
 
-  @media (min-width: 768px) {
+  @include bp.mq-up(bp.$bp-lg) {
     padding: var(--space-16) var(--container-pad);
   }
 }
@@ -13,7 +15,7 @@
   gap: var(--space-16);
   grid-template-columns: 1fr;
 
-  @media (min-width: 768px) {
+  @include bp.mq-up(bp.$bp-lg) {
     grid-template-columns: 1fr 1fr;
     align-items: start;
   }
@@ -105,7 +107,7 @@ h1 {
   &__error {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    color: var(--color-error, #e05c5c);
+    color: var(--color-error);
     letter-spacing: 0.03em;
   }
 
@@ -123,7 +125,7 @@ h1 {
     flex-shrink: 0;
 
     &--near {
-      color: var(--color-error, #e05c5c);
+      color: var(--color-error);
     }
   }
 }
@@ -155,7 +157,7 @@ textarea {
   }
 
   &.is-invalid {
-    border-color: var(--color-error, #e05c5c);
+    border-color: var(--color-error);
   }
 }
 
@@ -223,10 +225,10 @@ button[type='submit'] {
   }
 
   &--error {
-    border-color: var(--color-error, #e05c5c);
+    border-color: var(--color-error);
 
     svg {
-      stroke: var(--color-error, #e05c5c);
+      stroke: var(--color-error);
     }
   }
 

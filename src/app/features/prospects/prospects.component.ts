@@ -11,6 +11,8 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
+import { WHATSAPP_NUMBER } from '../../shared/constants';
+import { createToast } from '../../shared/forms/toast';
 
 type Lang = 'en' | 'es' | 'pt' | 'hi';
 
@@ -32,7 +34,6 @@ interface FormStrings {
 
 const FONT_LINK_ID = 'app-prospects-fonts';
 const LANG_STORAGE_KEY = 'prospects-lang';
-const WHATSAPP_NUMBER = '18178225269';
 const WHATSAPP_MESSAGES: Record<Lang, string> = {
   en: "Hi Jorge, I saw your page and I'm interested in a website.",
   es: 'Hola Jorge, vi su página y me interesa un sitio web.',
@@ -113,8 +114,12 @@ export class ProspectsComponent implements OnDestroy {
   readonly current = computed(() => this.languages.find((l) => l.code === this.lang())!);
   readonly t = computed(() => FORM_STRINGS[this.lang()]);
 
+  readonly waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGES.en)}`;
+  readonly telHref = `tel:+${WHATSAPP_NUMBER}`;
+
+  private readonly toastState = createToast(6000);
   readonly sending = signal(false);
-  readonly toast = signal<'success' | 'error' | null>(null);
+  readonly toast = this.toastState.toast;
   readonly form = this.fb.nonNullable.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
@@ -188,18 +193,13 @@ export class ProspectsComponent implements OnDestroy {
         message,
       });
       this.form.reset();
-      this.showToast('success');
+      this.toastState.show('success');
     } catch (err) {
       console.error('[prospects] contact submit failed:', err);
-      this.showToast('error');
+      this.toastState.show('error');
     } finally {
       this.sending.set(false);
     }
-  }
-
-  private showToast(type: 'success' | 'error'): void {
-    this.toast.set(type);
-    setTimeout(() => this.toast.set(null), 6000);
   }
 
   private applyLang(lang: Lang): void {

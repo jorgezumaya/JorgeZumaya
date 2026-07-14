@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
+import { SOCIAL_LINKS } from '../../shared/constants';
+import { createToast } from '../../shared/forms/toast';
 
 const URL_PATTERN = /https?:\/\/|www\./i;
 
@@ -24,10 +26,12 @@ function noLinks(control: AbstractControl): ValidationErrors | null {
 export class ContactComponent {
   private fb = inject(FormBuilder);
   private svc = inject(ContactService);
+  private readonly toastState = createToast(4000);
   sending = signal(false);
-  toast = signal<'success' | 'error' | null>(null);
+  readonly toast = this.toastState.toast;
 
   readonly MESSAGE_MAX = 2000;
+  readonly social = SOCIAL_LINKS;
 
   form = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -67,17 +71,12 @@ export class ContactComponent {
       const { website, ...payload } = this.form.getRawValue();
       await this.svc.submit(payload);
       this.form.reset();
-      this.showToast('success');
+      this.toastState.show('success');
     } catch (err) {
       console.error('[contact] error:', err);
-      this.showToast('error');
+      this.toastState.show('error');
     } finally {
       this.sending.set(false);
     }
-  }
-
-  private showToast(type: 'success' | 'error') {
-    this.toast.set(type);
-    setTimeout(() => this.toast.set(null), 4000);
   }
 }
