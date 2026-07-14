@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NAV_LINKS } from '../../shared/constants';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './nav.component.scss',
 })
 export class NavComponent {
+  readonly navLinks = NAV_LINKS;
   open = signal(false);
   private el = inject(ElementRef);
 

@@ -1,23 +1,25 @@
-import { Component, inject, OnInit, signal, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { GalleryService, Photo } from '../../core/services/gallery.service';
 import { PhotoModalComponent } from './photo-modal.component';
 import { RevealDirective } from '../../core/directives/reveal.directive';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { injectIsBrowser } from '../../shared/util/platform';
 
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [PhotoModalComponent, RevealDirective],
+  imports: [PhotoModalComponent, RevealDirective, PageHeaderComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent implements OnInit {
   svc = inject(GalleryService);
   selectedPhoto = signal<Photo | null>(null);
-  private platformId = inject(PLATFORM_ID);
+  private isBrowser = injectIsBrowser();
+  readonly skeletons = [1, 2, 3, 4, 5, 6];
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       this.svc.load();
     }
   }
@@ -28,9 +30,5 @@ export class GalleryComponent implements OnInit {
 
   closeModal(): void {
     this.selectedPhoto.set(null);
-  }
-
-  fakeLikes(order: number): number {
-    return order * 7 + 42;
   }
 }

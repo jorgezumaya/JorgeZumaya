@@ -1,0 +1,10 @@
+// Shared "eyebrow" label styling — used directly by page-level markup and by
+// PageHeaderComponent, so it lives globally rather than duplicated per component.
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}

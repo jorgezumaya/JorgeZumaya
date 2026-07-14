@@ -2,82 +2,27 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  PLATFORM_ID,
   afterNextRender,
   computed,
   inject,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
 import { WHATSAPP_NUMBER } from '../../shared/constants';
 import { createToast } from '../../shared/forms/toast';
-
-type Lang = 'en' | 'es' | 'pt' | 'hi';
-
-interface LangOption {
-  code: Lang;
-  label: string;
-  flag: string;
-}
-
-interface FormStrings {
-  namePh: string;
-  emailPh: string;
-  messagePh: string;
-  send: string;
-  sending: string;
-  success: string;
-  error: string;
-}
+import { injectIsBrowser } from '../../shared/util/platform';
+import { loadGoogleFonts } from '../../shared/dom/load-google-fonts';
+import {
+  FORM_STRINGS,
+  LANG_STORAGE_KEY,
+  Lang,
+  LangOption,
+  WHATSAPP_MESSAGES,
+  initialLang,
+} from './prospects-i18n';
 
 const FONT_LINK_ID = 'app-prospects-fonts';
-const LANG_STORAGE_KEY = 'prospects-lang';
-const WHATSAPP_MESSAGES: Record<Lang, string> = {
-  en: "Hi Jorge, I saw your page and I'm interested in a website.",
-  es: 'Hola Jorge, vi su página y me interesa un sitio web.',
-  pt: 'Oi Jorge, vi sua página e tenho interesse em um site.',
-  hi: 'नमस्ते Jorge, मैंने आपका पेज देखा और मुझे वेबसाइट बनवानी है।',
-};
-const FORM_STRINGS: Record<Lang, FormStrings> = {
-  en: {
-    namePh: 'Your name',
-    emailPh: 'Your email',
-    messagePh: 'What do you do, and what do you need? (a few words is fine)',
-    send: 'Send message',
-    sending: 'Sending…',
-    success: "Got it — I'll get back to you shortly. Thank you!",
-    error: "Something went wrong. Please try WhatsApp or call, and I'll make it right.",
-  },
-  es: {
-    namePh: 'Su nombre',
-    emailPh: 'Su correo',
-    messagePh: '¿A qué se dedica y qué necesita? (con unas palabras basta)',
-    send: 'Enviar mensaje',
-    sending: 'Enviando…',
-    success: 'Recibido — le respondo muy pronto. ¡Gracias!',
-    error: 'Algo salió mal. Escríbame por WhatsApp o llame, y lo resolvemos.',
-  },
-  pt: {
-    namePh: 'Seu nome',
-    emailPh: 'Seu e-mail',
-    messagePh: 'O que você faz e do que precisa? (algumas palavras já bastam)',
-    send: 'Enviar mensagem',
-    sending: 'Enviando…',
-    success: 'Recebido — respondo pra você em breve. Obrigado!',
-    error: 'Algo deu errado. Chama no WhatsApp ou liga, e a gente resolve.',
-  },
-  hi: {
-    namePh: 'आपका नाम',
-    emailPh: 'आपका ईमेल',
-    messagePh: 'आप क्या करते हैं और क्या चाहिए? (दो-चार शब्द ही काफ़ी हैं)',
-    send: 'मैसेज भेजें',
-    sending: 'भेज रहे हैं…',
-    success: 'मिल गया — मैं जल्दी ही आपसे संपर्क करूँगा। धन्यवाद!',
-    error: 'कुछ गड़बड़ हो गई। WhatsApp या कॉल करें, मैं सब ठीक कर दूँगा।',
-  },
-};
 const TILE_SIZE = 74;
 const TILE_INTERVAL_MS = 420;
 const TILE_LIT_MS = 2400;
@@ -92,7 +37,7 @@ const TILE_RED_CHANCE = 0.28;
 })
 export class ProspectsComponent implements OnDestroy {
   private readonly host: HTMLElement = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = injectIsBrowser();
   private readonly fb = inject(FormBuilder);
   private readonly contact = inject(ContactService);
   private tileInterval?: ReturnType<typeof setInterval>;
@@ -114,7 +59,7 @@ export class ProspectsComponent implements OnDestroy {
   readonly current = computed(() => this.languages.find((l) => l.code === this.lang())!);
   readonly t = computed(() => FORM_STRINGS[this.lang()]);
 
-  readonly waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGES.en)}`;
+  readonly waHref = this.buildWaHref('en');
   readonly telHref = `tel:+${WHATSAPP_NUMBER}`;
 
   private readonly toastState = createToast(6000);
@@ -134,7 +79,7 @@ export class ProspectsComponent implements OnDestroy {
       window.addEventListener('resize', this.onResize);
       document.addEventListener('click', this.onDocumentClick);
 
-      const initial = this.initialLang();
+      const initial = initialLang();
       if (initial !== 'en') this.applyLang(initial);
 
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -145,7 +90,7 @@ export class ProspectsComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       window.removeEventListener('resize', this.onResize);
       document.removeEventListener('click', this.onDocumentClick);
     }
@@ -202,6 +147,10 @@ export class ProspectsComponent implements OnDestroy {
     }
   }
 
+  // TODO: architectural debt — this component swaps copy via raw DOM attributes/innerHTML
+  // instead of the signal/computed template bindings used elsewhere in the app. Works, but is
+  // untestable via TestBed and invisible to change detection. Consider migrating to computed()
+  // text bindings if this page grows further.
   private applyLang(lang: Lang): void {
     this.lang.set(lang);
     this.host.querySelectorAll<HTMLElement>('[data-en]').forEach((el) => {
@@ -214,49 +163,24 @@ export class ProspectsComponent implements OnDestroy {
     });
     const waLink = this.host.querySelector<HTMLAnchorElement>('#wa-link');
     if (waLink) {
-      waLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGES[lang])}`;
+      waLink.href = this.buildWaHref(lang);
     }
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
   }
 
-  /** Saved choice wins; otherwise match the browser/phone language; default English. */
-  private initialLang(): Lang {
-    try {
-      const saved = localStorage.getItem(LANG_STORAGE_KEY);
-      if (saved === 'en' || saved === 'es' || saved === 'pt' || saved === 'hi') return saved;
-    } catch {
-      // Storage unavailable — fall through to browser language detection
-    }
-    const candidates = navigator.languages?.length ? navigator.languages : [navigator.language];
-    for (const candidate of candidates) {
-      const base = candidate?.toLowerCase().split('-')[0];
-      if (base === 'pt') return 'pt';
-      if (base === 'es') return 'es';
-      if (base === 'hi') return 'hi';
-      if (base === 'en') return 'en';
-    }
-    return 'en';
+  private buildWaHref(lang: Lang): string {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGES[lang])}`;
   }
 
   private loadFonts(): void {
-    if (document.getElementById(FONT_LINK_ID)) return;
-
-    const preconnect1 = document.createElement('link');
-    preconnect1.rel = 'preconnect';
-    preconnect1.href = 'https://fonts.googleapis.com';
-
-    const preconnect2 = document.createElement('link');
-    preconnect2.rel = 'preconnect';
-    preconnect2.href = 'https://fonts.gstatic.com';
-    preconnect2.crossOrigin = 'anonymous';
-
-    const stylesheet = document.createElement('link');
-    stylesheet.id = FONT_LINK_ID;
-    stylesheet.rel = 'stylesheet';
-    stylesheet.href =
-      'https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@500;700;900&display=swap';
-
-    document.head.append(preconnect1, preconnect2, stylesheet);
+    loadGoogleFonts(
+      'https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@500;700;900&display=swap',
+      FONT_LINK_ID,
+      [
+        { href: 'https://fonts.googleapis.com' },
+        { href: 'https://fonts.gstatic.com', crossOrigin: true },
+      ],
+    );
   }
 
   private buildTiles(): void {

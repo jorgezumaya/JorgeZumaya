@@ -1,20 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
 import { SOCIAL_LINKS } from '../../shared/constants';
 import { createToast } from '../../shared/forms/toast';
-
-const URL_PATTERN = /https?:\/\/|www\./i;
-
-function noLinks(control: AbstractControl): ValidationErrors | null {
-  return URL_PATTERN.test(control.value ?? '') ? { noLinks: true } : null;
-}
+import { noLinks } from '../../shared/forms/validators';
+import { fieldError } from '../../shared/forms/field-error';
+import { markAllDirty } from '../../shared/forms/mark-all-dirty';
 
 @Component({
   selector: 'app-contact',
@@ -48,23 +39,13 @@ export class ContactComponent {
     return this.form.controls.message.value.length;
   }
 
-  fieldError(field: 'name' | 'email' | 'subject' | 'message'): string | null {
-    const ctrl = this.form.controls[field];
-    if (!ctrl.dirty || ctrl.valid) return null;
-    if (ctrl.hasError('required')) return 'This field is required.';
-    if (ctrl.hasError('email')) return 'Please enter a valid email address.';
-    if (ctrl.hasError('noLinks')) return 'Links are not permitted in the subject line.';
-    if (ctrl.hasError('minlength')) return 'Message must be at least 10 characters.';
-    if (ctrl.hasError('maxlength')) return `Message cannot exceed ${this.MESSAGE_MAX} characters.`;
-    return null;
+  fieldError(field: 'name' | 'email' | 'subject' | 'message') {
+    return fieldError(this.form.controls[field]);
   }
 
   async submit() {
     this.form.markAllAsTouched();
-    this.form.controls.name.markAsDirty();
-    this.form.controls.email.markAsDirty();
-    this.form.controls.subject.markAsDirty();
-    this.form.controls.message.markAsDirty();
+    markAllDirty(this.form);
     if (this.form.invalid || this.form.value.website) return;
     this.sending.set(true);
     try {

@@ -1,5 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="jz">
-  <title>jz.</title>
-  <rect width="64" height="64" rx="12" fill="#0A0A0A"/>
-  <text x="32" y="44" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-weight="700" font-size="36" letter-spacing="-1" text-anchor="middle" fill="#FAFAFA">jz<tspan fill="#FF3D00">.</tspan></text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Jorge Zumaya">
+  <title>jorge.zumaya</title>
+  <rect width="48" height="48" rx="9" fill="#0C0C0E"/>
+  <rect x="9" y="9" width="14" height="14" fill="#E3312B"/>
+  <rect x="25" y="9" width="14" height="14" fill="#2A2A30"/>
+  <rect x="9" y="25" width="14" height="14" fill="#2A2A30"/>
+  <path d="M32 25 v9.5 a4.5 4.5 0 0 1 -4.5 4.5 h-2.5" fill="none" stroke="#F5F4F2" stroke-width="4" stroke-linecap="square"/>
 </svg>

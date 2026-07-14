@@ -1,5 +1,5 @@
-import { Directive, ElementRef, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Directive, ElementRef, inject, OnDestroy, OnInit } from '@angular/core';
+import { injectIsBrowser } from '../../shared/util/platform';
 
 @Directive({
   selector: '[appReveal]',
@@ -8,12 +8,12 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class RevealDirective implements OnInit, OnDestroy {
   private el = inject(ElementRef<HTMLElement>);
-  private platformId = inject(PLATFORM_ID);
+  private isBrowser = injectIsBrowser();
   private observer?: IntersectionObserver;
 
   ngOnInit(): void {
     // IntersectionObserver is browser-only — no-op during SSR
-    if (!isPlatformBrowser(this.platformId)) {
+    if (!this.isBrowser) {
       this.el.nativeElement.classList.add('is-visible');
       return;
     }

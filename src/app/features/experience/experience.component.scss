@@ -18,22 +18,6 @@
   }
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: var(--space-3);
-}
-
-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
 // ── Section heading ────────────────────────────────────────
 .section-heading {
   font-family: var(--font-display);
@@ -41,26 +25,6 @@ h1 {
   letter-spacing: -0.02em;
   margin-bottom: var(--space-8);
   color: var(--color-text);
-}
-
-// ── Chip shared ────────────────────────────────────────────
-.chip {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  padding: 3px var(--space-2);
-  background: var(--color-surface-2);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  letter-spacing: 0.06em;
-  white-space: nowrap;
-  transition:
-    border-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out);
-
-  &:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
 }
 
 // ── Timeline ───────────────────────────────────────────────
@@ -194,13 +158,6 @@ h1 {
       color: var(--color-accent);
     }
   }
-}
-
-.timeline__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  list-style: none;
 }
 
 // ── Education ──────────────────────────────────────────────
