@@ -16,3 +16,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Work', path: '/work' },
   { label: 'Gallery', path: '/gallery' },
 ];
+
+/** One is picked at random on each load — see App's favicon swap. */
+export const FAVICONS = ['favicon-j.svg', 'favicon-jz.svg'] as const;
