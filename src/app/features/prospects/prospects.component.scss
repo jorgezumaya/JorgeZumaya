@@ -1,0 +1,566 @@
+:host {
+  --p-black: #0c0c0e;
+  --p-panel: #141417;
+  --p-panel-2: #1b1b1f;
+  --p-line: #2a2a30;
+  --p-white: #f5f4f2;
+  --p-grey: #a6a6ae;
+  --p-red: #e3312b;
+  --p-red-deep: #a81f1b;
+  --p-wa: #25d366;
+  --p-wa-deep: #1da851;
+
+  display: block;
+  font-family: 'Archivo', 'Noto Sans Devanagari', sans-serif;
+  background: var(--p-black);
+  color: var(--p-white);
+  line-height: 1.65;
+  font-size: 17px;
+}
+
+:host * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:host .mono {
+  font-family: 'IBM Plex Mono', 'Noto Sans Devanagari', monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--p-red);
+  font-weight: 500;
+}
+
+:host h1,
+:host h2,
+:host h3 {
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+/* Devanagari needs headroom for matras — the tight Latin line-height clips them */
+:host(.lang-hi) h1,
+:host(.lang-hi) h2,
+:host(.lang-hi) h3 {
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+/* ---------- Logo ---------- */
+:host .logo {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-decoration: none;
+}
+:host .logo-mark {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+:host .logo-word {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 1.25rem;
+  color: var(--p-white);
+  letter-spacing: 0.06em;
+}
+:host .logo-word i {
+  font-style: normal;
+  color: var(--p-red);
+}
+
+/* ---------- Nav ---------- */
+:host nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(12, 12, 14, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--p-line);
+}
+:host .lang-menu {
+  position: relative;
+}
+:host .lang-menu button {
+  font-family: 'IBM Plex Mono', 'Noto Sans Devanagari', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: var(--p-grey);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+:host .lang-menu button:focus-visible {
+  outline: 2px solid var(--p-white);
+  outline-offset: -2px;
+}
+:host .lang-menu .flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  display: block;
+  flex-shrink: 0;
+}
+:host .lang-menu .lang-current {
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  padding: 8px 13px;
+  color: var(--p-white);
+}
+:host .lang-menu .lang-current:hover {
+  border-color: var(--p-red);
+}
+:host .lang-current .chevron {
+  width: 10px;
+  height: 6px;
+  color: var(--p-grey);
+  transition: transform 0.15s;
+}
+:host .lang-current .chevron.open {
+  transform: rotate(180deg);
+}
+:host .lang-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  min-width: 172px;
+  display: flex;
+  flex-direction: column;
+  background: var(--p-panel);
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+}
+:host .lang-options button {
+  padding: 11px 15px;
+  text-align: left;
+  width: 100%;
+}
+:host .lang-options button:hover {
+  background: var(--p-panel-2);
+  color: var(--p-white);
+}
+:host .lang-options button.active {
+  background: var(--p-red);
+  color: #fff;
+}
+
+/* ---------- Hero ---------- */
+:host header.hero {
+  position: relative;
+  overflow: hidden;
+}
+:host .tile-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 72px);
+  grid-auto-rows: 72px;
+  gap: 2px;
+  padding: 2px;
+  pointer-events: none;
+}
+/* ::ng-deep — tiles are created with createElement, outside Angular's style scoping */
+:host .tile-field ::ng-deep .tile {
+  border: 1px solid #17171a;
+  transition: background 0.5s ease;
+}
+:host .tile-field ::ng-deep .tile.lit {
+  background: var(--p-panel-2);
+}
+:host .tile-field ::ng-deep .tile.lit-red {
+  background: var(--p-red);
+  opacity: 0.16;
+}
+:host .hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 96px 24px 104px;
+}
+:host .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--p-line);
+  border-radius: 999px;
+  padding: 7px 16px;
+  margin-bottom: 26px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--p-grey);
+}
+:host .hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--p-red);
+}
+:host .hero h1 {
+  font-size: clamp(2.5rem, 7vw, 4.6rem);
+  max-width: 850px;
+  margin-bottom: 24px;
+}
+/* Portuguese and Hindi headline copy runs longer — tighten so it wraps like the EN version */
+:host(.lang-pt) .hero h1,
+:host(.lang-hi) .hero h1 {
+  font-size: clamp(2.1rem, 5.6vw, 3.8rem);
+}
+/* ::ng-deep — the language swap injects this span via innerHTML, outside Angular's style scoping */
+:host .hero h1 ::ng-deep .red,
+:host .hero h1 .red {
+  color: var(--p-red);
+}
+:host .hero p.lede {
+  font-size: 1.18rem;
+  max-width: 580px;
+  color: var(--p-grey);
+}
+:host .hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 38px;
+  flex-wrap: wrap;
+}
+:host .btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    color 0.15s;
+}
+:host .btn:focus-visible {
+  outline: 2px solid var(--p-white);
+  outline-offset: 3px;
+}
+:host .btn-red {
+  background: var(--p-red);
+  color: #fff;
+}
+:host .btn-red:hover {
+  background: var(--p-red-deep);
+  transform: translateY(-2px);
+}
+:host .btn-line {
+  border: 1px solid var(--p-line);
+  color: var(--p-white);
+}
+:host .btn-line:hover {
+  border-color: var(--p-red);
+  color: var(--p-red);
+}
+:host .btn-wa {
+  background: var(--p-wa);
+  color: #fff;
+}
+:host .btn-wa:hover {
+  background: var(--p-wa-deep);
+  transform: translateY(-2px);
+}
+/* WhatsApp dominates in the Spanish, Portuguese, and Hindi-speaking communities — lead with it */
+:host(.lang-es) .contact-methods .btn-wa,
+:host(.lang-pt) .contact-methods .btn-wa,
+:host(.lang-hi) .contact-methods .btn-wa {
+  order: -1;
+}
+
+/* ---------- Sections ---------- */
+:host section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 84px 24px;
+}
+:host section + section,
+:host footer {
+  border-top: 1px solid var(--p-line);
+}
+:host .section-head {
+  margin-bottom: 44px;
+}
+:host .section-head h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.5rem);
+  margin-top: 12px;
+}
+
+/* Process */
+:host .steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  background: var(--p-line);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+:host .step {
+  background: var(--p-panel);
+  padding: 32px 28px;
+}
+:host .step .step-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2.2rem;
+  color: var(--p-red);
+  line-height: 1;
+}
+:host .step h3 {
+  font-size: 1.1rem;
+  margin: 14px 0 10px;
+}
+:host .step p {
+  color: var(--p-grey);
+  font-size: 0.97rem;
+}
+
+/* Services */
+:host .services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  background: var(--p-line);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+:host .service-card {
+  background: var(--p-panel);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+:host .service-card.hot {
+  background: var(--p-panel-2);
+  box-shadow: inset 0 3px 0 var(--p-red);
+}
+:host .service-card h3 {
+  font-size: 1.15rem;
+  margin: 12px 0 10px;
+}
+:host .service-card p {
+  color: var(--p-grey);
+  font-size: 0.96rem;
+  flex-grow: 1;
+}
+:host .price {
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
+  font-size: 1.6rem;
+  margin-top: 22px;
+  color: var(--p-white);
+}
+:host .price em {
+  font-style: normal;
+  color: var(--p-red);
+}
+:host .price small {
+  font-family: 'Archivo', 'Noto Sans Devanagari', sans-serif;
+  font-weight: 500;
+  font-size: 0.78rem;
+  color: var(--p-grey);
+  display: block;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* Work */
+:host .work-panel {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 44px;
+  align-items: center;
+  background: var(--p-panel);
+  border: 1px solid var(--p-line);
+  border-radius: 14px;
+  padding: 48px 42px;
+}
+:host .work-panel h3 {
+  font-size: 1.7rem;
+  margin: 12px 0 14px;
+}
+:host .work-panel p {
+  color: var(--p-grey);
+}
+:host .work-visual {
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(0deg, var(--p-panel-2) 0 56px, var(--p-black) 56px 60px),
+    repeating-linear-gradient(90deg, transparent 0 56px, var(--p-black) 56px 60px);
+  border: 1px solid var(--p-line);
+}
+:host .work-visual::after {
+  content: 'AVILA';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 2.1rem;
+  letter-spacing: 0.25em;
+  color: var(--p-white);
+  background: linear-gradient(160deg, rgba(227, 49, 43, 0.22), rgba(12, 12, 14, 0.72));
+}
+:host .work-link {
+  margin-top: 22px;
+  display: inline-block;
+}
+
+/* Bilingual */
+:host .split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+:host .split h2 {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  margin: 12px 0 20px;
+}
+:host .split p {
+  color: var(--p-grey);
+  margin-bottom: 14px;
+}
+:host .stat-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--p-line);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+:host .stat-tile {
+  background: var(--p-panel);
+  padding: 28px 22px;
+}
+:host .stat-tile .big {
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
+  font-size: 1.7rem;
+  color: var(--p-red);
+}
+:host .stat-tile .label {
+  font-size: 0.88rem;
+  color: var(--p-grey);
+  margin-top: 6px;
+}
+
+/* Plans */
+:host .plans {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--p-line);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+:host .plan {
+  background: var(--p-panel);
+  padding: 34px 30px;
+}
+:host .plan.featured {
+  background: var(--p-panel-2);
+  box-shadow: inset 0 3px 0 var(--p-red);
+}
+:host .plan h3 {
+  font-size: 1.1rem;
+}
+:host .plan .price {
+  margin: 10px 0 18px;
+}
+:host .plan ul {
+  list-style: none;
+}
+:host .plan li {
+  padding: 8px 0 8px 26px;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--p-grey);
+}
+:host .plan li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 15px;
+  width: 10px;
+  height: 10px;
+  background: var(--p-red);
+}
+
+/* Contact */
+:host .contact-panel {
+  text-align: center;
+  padding: 40px 0 10px;
+}
+:host .contact-panel h2 {
+  font-size: clamp(1.9rem, 5vw, 2.9rem);
+  margin: 12px 0 16px;
+}
+:host .contact-panel p {
+  max-width: 500px;
+  margin: 0 auto 32px;
+  color: var(--p-grey);
+}
+:host .contact-methods {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+:host footer {
+  padding: 30px 24px;
+  text-align: center;
+}
+:host footer .logo {
+  justify-content: center;
+  margin-bottom: 12px;
+}
+:host footer p {
+  font-size: 0.84rem;
+  color: var(--p-grey);
+}
+
+@media (max-width: 780px) {
+  :host .work-panel,
+  :host .split {
+    grid-template-columns: 1fr;
+  }
+  :host .plans {
+    grid-template-columns: 1fr;
+  }
+  :host section {
+    padding: 60px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :host * {
+    transition: none !important;
+  }
+}

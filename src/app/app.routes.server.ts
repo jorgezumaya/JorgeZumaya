@@ -5,10 +5,15 @@ export const serverRoutes: ServerRoute[] = [
   { path: '', renderMode: RenderMode.Prerender },
   { path: 'experience', renderMode: RenderMode.Prerender },
   { path: 'work', renderMode: RenderMode.Prerender },
-  // Dynamic pages — render on each request (Firebase data required)
-  { path: 'gallery', renderMode: RenderMode.Server },
+  // Gallery needs live Firebase data, but Firebase Hosting only serves the
+  // static browser build here — there is no deployed SSR server to render
+  // this per request. Render fully client-side instead of a mismatched shell.
+  { path: 'gallery', renderMode: RenderMode.Client },
   // Contact is a static form — prerender to avoid SSR/Firestore hydration conflict
   { path: 'contact', renderMode: RenderMode.Prerender },
-  // Fallback
-  { path: '**', renderMode: RenderMode.Server },
+  // Prospects is a static bilingual landing page shared as a direct link — prerender.
+  { path: 'prospects', renderMode: RenderMode.Prerender },
+  // Fallback — no SSR server is deployed, so client-render rather than
+  // falling back to a mismatched static shell.
+  { path: '**', renderMode: RenderMode.Client },
 ];

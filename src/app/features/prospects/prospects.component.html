@@ -1,0 +1,708 @@
+<nav>
+  <a class="logo" href="#" aria-label="Jorge home">
+    <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true">
+      <rect
+        x="1.5"
+        y="1.5"
+        width="45"
+        height="45"
+        rx="7"
+        fill="none"
+        stroke="#E3312B"
+        stroke-width="3"
+      />
+      <rect x="9" y="9" width="14" height="14" fill="#E3312B" />
+      <rect x="25" y="9" width="14" height="14" fill="#2A2A30" />
+      <rect x="9" y="25" width="14" height="14" fill="#2A2A30" />
+      <path
+        d="M32 25 v9.5 a4.5 4.5 0 0 1 -4.5 4.5 h-2.5"
+        fill="none"
+        stroke="#F5F4F2"
+        stroke-width="4"
+        stroke-linecap="square"
+      />
+    </svg>
+    <span class="logo-word">JORGE<i>.</i></span>
+  </a>
+  <div class="lang-menu">
+    <button
+      class="lang-current"
+      type="button"
+      (click)="toggleMenu($event)"
+      [attr.aria-expanded]="menuOpen()"
+      aria-haspopup="listbox"
+      aria-label="Language / Idioma / Língua / भाषा"
+    >
+      <img
+        class="flag"
+        [src]="'assets/flags/flag-' + current().flag + '.svg'"
+        alt=""
+        width="18"
+        height="12"
+      />
+      <span class="lang-code">{{ current().code.toUpperCase() }}</span>
+      <svg class="chevron" viewBox="0 0 10 6" aria-hidden="true" [class.open]="menuOpen()">
+        <path
+          d="M1 1 L5 5 L9 1"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+        />
+      </svg>
+    </button>
+    @if (menuOpen()) {
+      <div class="lang-options" role="listbox">
+        @for (option of languages; track option.code) {
+          <button
+            type="button"
+            role="option"
+            [attr.aria-selected]="lang() === option.code"
+            [class.active]="lang() === option.code"
+            (click)="choose(option.code)"
+          >
+            <img
+              class="flag"
+              [src]="'assets/flags/flag-' + option.flag + '.svg'"
+              alt=""
+              width="18"
+              height="12"
+            />
+            {{ option.label }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="tile-field" id="tileField" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span><span>Fort Worth, TX</span></div>
+    <h1
+      data-en='More calls. More customers. A website that <span class="red">earns its keep.</span>'
+      data-es='Más llamadas. Más clientes. Un sitio web que <span class="red">se paga solo.</span>'
+      data-pt='Mais ligações. Mais clientes. Um site que <span class="red">se paga sozinho.</span>'
+      data-hi='ज़्यादा कॉल। ज़्यादा ग्राहक। एक वेबसाइट <span class="red">जो अपना खर्च खुद निकाले।</span>'
+    >
+      More calls. More customers. A website that <span class="red">earns its keep.</span>
+    </h1>
+    <p
+      class="lede"
+      data-en="I build fast, professional websites for contractors, shops, and local businesses across DFW. In English, Spanish, Portuguese, or Hindi. No agency runaround. You deal directly with the person writing the code."
+      data-es="Construyo sitios web rápidos y profesionales para contratistas, tiendas y negocios locales en todo el DFW. En inglés, español, portugués o hindi. Sin vueltas de agencia. Usted trata directamente con la persona que escribe el código."
+      data-pt="Construo sites rápidos e profissionais para empreiteiros, lojas e negócios locais em todo o DFW. Em inglês, espanhol, português ou hindi. Sem enrolação de agência. Você fala direto com a pessoa que escreve o código."
+      data-hi="मैं DFW के कॉन्ट्रैक्टर, दुकानों और लोकल बिज़नेस के लिए तेज़ और प्रोफेशनल वेबसाइट बनाता हूँ। अंग्रेज़ी, स्पैनिश, पुर्तगाली या हिन्दी में। एजेंसी वाले चक्कर नहीं। आप सीधे उसी इंसान से बात करते हैं जो कोड लिखता है।"
+    >
+      I build fast, professional websites for contractors, shops, and local businesses across DFW.
+      In English, Spanish, Portuguese, or Hindi. No agency runaround. You deal directly with the
+      person writing the code.
+    </p>
+    <div class="hero-cta">
+      <a
+        class="btn btn-red"
+        href="#contact"
+        (click)="scrollToSection($event, 'contact')"
+        data-en="Get a free quote"
+        data-es="Cotización gratis"
+        data-pt="Obtenha um orçamento grátis"
+        data-hi="मुफ़्त कोटेशन लें"
+        >Get a free quote</a
+      >
+      <a
+        class="btn btn-line"
+        href="#work"
+        (click)="scrollToSection($event, 'work')"
+        data-en="See my work"
+        data-es="Ver mi trabajo"
+        data-pt="Ver meu trabalho"
+        data-hi="मेरा काम देखें"
+        >See my work</a
+      >
+    </div>
+  </div>
+</header>
+
+<section id="process">
+  <div class="section-head">
+    <div
+      class="mono"
+      data-en="How it works"
+      data-es="Cómo funciona"
+      data-pt="Como funciona"
+      data-hi="यह कैसे काम करता है"
+    >
+      How it works
+    </div>
+    <h2
+      data-en="Live in weeks, not months"
+      data-es="En línea en semanas, no meses"
+      data-pt="No ar em semanas, não meses"
+      data-hi="हफ़्तों में लाइव, महीनों में नहीं"
+    >
+      Live in weeks, not months
+    </h2>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3 data-en="We talk" data-es="Hablamos" data-pt="Conversamos" data-hi="हम बात करते हैं">
+        We talk
+      </h3>
+      <p
+        data-en="A free 15 minute call. You tell me about your business, I tell you exactly what I would build and what it costs. No pressure, no jargon."
+        data-es="Una llamada gratis de 15 minutos. Usted me cuenta de su negocio, yo le digo exactamente qué construiría y cuánto cuesta. Sin presión, sin tecnicismos."
+        data-pt="Uma ligação grátis de 15 minutos. Você me conta sobre o seu negócio, eu te digo exatamente o que eu criaria e quanto custa. Sem pressão, sem jargão."
+        data-hi="15 मिनट की मुफ़्त कॉल। आप अपने बिज़नेस के बारे में बताइए, मैं साफ़ बताऊँगा कि क्या बनाऊँगा और कितना खर्च आएगा। न कोई दबाव, न भारी तकनीकी भाषा।"
+      >
+        A free 15 minute call. You tell me about your business, I tell you exactly what I would
+        build and what it costs. No pressure, no jargon.
+      </p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3 data-en="I build" data-es="Yo construyo" data-pt="Eu construo" data-hi="मैं बनाता हूँ">
+        I build
+      </h3>
+      <p
+        data-en="You see progress along the way and get two rounds of revisions included. Nothing goes live until you love it."
+        data-es="Usted ve el avance en el camino y tiene dos rondas de revisiones incluidas. Nada se publica hasta que le encante."
+        data-pt="Você acompanha o progresso e tem duas rodadas de revisões incluídas. Nada vai ao ar até você adorar."
+        data-hi="काम की प्रगति आप देखते रहते हैं और दो राउंड के बदलाव इसमें शामिल हैं। जब तक आपको पूरी तरह पसंद न आए, कुछ भी लाइव नहीं होता।"
+      >
+        You see progress along the way and get two rounds of revisions included. Nothing goes live
+        until you love it.
+      </p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3 data-en="You launch" data-es="Usted lanza" data-pt="Você lança" data-hi="आप लॉन्च करें">
+        You launch
+      </h3>
+      <p
+        data-en="Your site goes live, set up to show up on Google and ready for customers on any phone. I stay available after launch."
+        data-es="Su sitio se publica, configurado para aparecer en Google y listo para clientes en cualquier celular. Sigo disponible después del lanzamiento."
+        data-pt="Seu site vai ao ar, configurado para aparecer no Google e pronto para clientes em qualquer celular. Fico disponível depois do lançamento."
+        data-hi="आपकी साइट लाइव हो जाती है, Google पर दिखने के लिए सेट और हर फ़ोन पर ग्राहकों के लिए तैयार। लॉन्च के बाद भी मैं साथ रहता हूँ।"
+      >
+        Your site goes live, set up to show up on Google and ready for customers on any phone. I
+        stay available after launch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-head">
+    <div
+      class="mono"
+      data-en="Services and pricing"
+      data-es="Servicios y precios"
+      data-pt="Serviços e preços"
+      data-hi="सेवाएँ और कीमतें"
+    >
+      Services and pricing
+    </div>
+    <h2
+      data-en="Straight prices. No surprises."
+      data-es="Precios directos. Sin sorpresas."
+      data-pt="Preços diretos. Sem surpresas."
+      data-hi="सीधी कीमतें। कोई छुपा खर्च नहीं।"
+    >
+      Straight prices. No surprises.
+    </h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div
+        class="mono"
+        data-en="Most popular"
+        data-es="Más solicitado"
+        data-pt="Mais popular"
+        data-hi="सबसे लोकप्रिय"
+      >
+        Most popular
+      </div>
+      <h3
+        data-en="Business Website"
+        data-es="Sitio de negocio"
+        data-pt="Site de negócio"
+        data-hi="बिज़नेस वेबसाइट"
+      >
+        Business Website
+      </h3>
+      <p
+        data-en="Up to 5 pages: home, services, about, gallery, contact. Built to load fast, look sharp on every phone, and turn visitors into phone calls."
+        data-es="Hasta 5 páginas: inicio, servicios, nosotros, galería, contacto. Hecho para cargar rápido, verse impecable en cualquier celular y convertir visitas en llamadas."
+        data-pt="Até 5 páginas: início, serviços, sobre, galeria, contato. Feito para carregar rápido, ter boa aparência em qualquer celular e transformar visitas em ligações."
+        data-hi="5 पेज तक: होम, सेवाएँ, परिचय, गैलरी, संपर्क। तेज़ लोडिंग, हर फ़ोन पर दमदार लुक, और विज़िटर को फ़ोन कॉल में बदलने के लिए बनाई गई।"
+      >
+        Up to 5 pages: home, services, about, gallery, contact. Built to load fast, look sharp on
+        every phone, and turn visitors into phone calls.
+      </p>
+      <div class="price">
+        <em data-en="From" data-es="Desde" data-pt="A partir de" data-hi="शुरुआती">From</em> $1,500
+      </div>
+    </div>
+    <div class="service-card hot">
+      <div
+        class="mono"
+        data-en="Best value"
+        data-es="Mejor valor"
+        data-pt="Melhor custo-benefício"
+        data-hi="सबसे बढ़िया वैल्यू"
+      >
+        Best value
+      </div>
+      <h3
+        data-en="Multilingual Site (EN/ES/PT/HI)"
+        data-es="Sitio multilingüe (EN/ES/PT/HI)"
+        data-pt="Site Multilíngue (EN/ES/PT/HI)"
+        data-hi="मल्टीलैंग्वेज साइट (EN/ES/PT/HI)"
+      >
+        Multilingual Site (EN/ES/PT/HI)
+      </h3>
+      <p
+        data-en="Everything in the business website, fully written in the languages your customers speak. Professional translation that sounds local, not Google Translate. Reach every customer in DFW, including the ones your competitors can't talk to."
+        data-es="Todo lo del sitio de negocio, escrito completamente en los idiomas que hablan sus clientes. Traducción profesional que suena natural, no Google Translate. Llegue a todos sus clientes en el DFW, incluyendo a los que su competencia no puede atender."
+        data-pt="Tudo do site de negócio, escrito por completo nos idiomas que seus clientes falam. Tradução profissional que soa natural, não Google Translate. Alcance todos os clientes no DFW, incluindo os que seus concorrentes não conseguem atender."
+        data-hi="बिज़नेस वेबसाइट की हर चीज़, आपके ग्राहकों की भाषाओं में पूरी तरह लिखी हुई। प्रोफेशनल अनुवाद जो एकदम अपना लगे, Google Translate नहीं। DFW के हर ग्राहक तक पहुँचिए, उन तक भी जिनसे आपके कॉम्पिटिटर बात ही नहीं कर पाते।"
+      >
+        Everything in the business website, fully written in the languages your customers speak.
+        Professional translation that sounds local, not Google Translate. Reach every customer in
+        DFW, including the ones your competitors can't talk to.
+      </p>
+      <div class="price">
+        <em data-en="From" data-es="Desde" data-pt="A partir de" data-hi="शुरुआती">From</em> $2,500
+      </div>
+    </div>
+    <div class="service-card">
+      <div
+        class="mono"
+        data-en="Custom"
+        data-es="A la medida"
+        data-pt="Personalizado"
+        data-hi="कस्टम"
+      >
+        Custom
+      </div>
+      <h3
+        data-en="Booking and Custom Builds"
+        data-es="Reservas y proyectos a la medida"
+        data-pt="Reservas e Projetos Personalizados"
+        data-hi="बुकिंग और कस्टम प्रोजेक्ट"
+      >
+        Booking and Custom Builds
+      </h3>
+      <p
+        data-en="Online booking, quote request forms, photo galleries, customer portals. Built with the same enterprise technology I use as a software engineer by day."
+        data-es="Reservas en línea, formularios de cotización, galerías de fotos, portales de clientes. Construido con la misma tecnología empresarial que uso como ingeniero de software de día."
+        data-pt="Reservas online, formulários de orçamento, galerias de fotos, portais de clientes. Construído com a mesma tecnologia empresarial que uso como engenheiro de software no dia a dia."
+        data-hi="ऑनलाइन बुकिंग, कोटेशन फ़ॉर्म, फोटो गैलरी, कस्टमर पोर्टल। वही एंटरप्राइज़ टेक्नोलॉजी जिस पर मैं दिन में बतौर सॉफ़्टवेयर इंजीनियर काम करता हूँ।"
+      >
+        Online booking, quote request forms, photo galleries, customer portals. Built with the same
+        enterprise technology I use as a software engineer by day.
+      </p>
+      <div class="price">
+        <em data-en="From" data-es="Desde" data-pt="A partir de" data-hi="शुरुआती">From</em> $3,500
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-head">
+    <div
+      class="mono"
+      data-en="Featured work"
+      data-es="Trabajo destacado"
+      data-pt="Trabalho em destaque"
+      data-hi="चुना हुआ काम"
+    >
+      Featured work
+    </div>
+    <h2>Avila Contracting</h2>
+  </div>
+  <div class="work-panel">
+    <div>
+      <div
+        class="mono"
+        data-en="Tile contractor · Fort Worth, TX"
+        data-es="Contratista de azulejo · Fort Worth, TX"
+        data-pt="Empreiteiro de azulejo · Fort Worth, TX"
+        data-hi="टाइल कॉन्ट्रैक्टर · Fort Worth, TX"
+      >
+        Tile contractor · Fort Worth, TX
+      </div>
+      <h3
+        data-en="A modern site for a family tile business"
+        data-es="Un sitio moderno para un negocio familiar de azulejo"
+        data-pt="Um site moderno para um negócio familiar de azulejo"
+        data-hi="एक पारिवारिक टाइल बिज़नेस के लिए मॉडर्न साइट"
+      >
+        A modern site for a family tile business
+      </h3>
+      <p
+        data-en="Complete redesign with a custom brand identity, project gallery, and quote request form. Built to load fast on any phone, because that is where customers are searching."
+        data-es="Rediseño completo con identidad de marca propia, galería de proyectos y formulario de cotización. Hecho para cargar rápido en cualquier celular, porque ahí es donde buscan los clientes."
+        data-pt="Redesign completo com identidade de marca personalizada, galeria de projetos e formulário de orçamento. Feito para carregar rápido em qualquer celular, porque é lá que os clientes estão pesquisando."
+        data-hi="पूरा रीडिज़ाइन: नई ब्रांड पहचान, प्रोजेक्ट गैलरी और कोटेशन फ़ॉर्म। हर फ़ोन पर झटपट खुलने के लिए बनाई गई, क्योंकि ग्राहक वहीं से ढूँढते हैं।"
+      >
+        Complete redesign with a custom brand identity, project gallery, and quote request form.
+        Built to load fast on any phone, because that is where customers are searching.
+      </p>
+      <a
+        class="btn btn-line work-link"
+        href="https://avilacontractingllc.com"
+        target="_blank"
+        rel="noopener"
+        data-en="Visit the live site"
+        data-es="Visitar el sitio en vivo"
+        data-pt="Visitar o site"
+        data-hi="लाइव साइट देखें"
+        >Visit the live site</a
+      >
+    </div>
+    <div class="work-visual" role="img" aria-label="Avila Contracting project preview"></div>
+  </div>
+</section>
+
+<section id="bilingual">
+  <div class="split">
+    <div>
+      <div
+        class="mono"
+        data-en="Why multilingual wins"
+        data-es="Por qué lo multilingüe gana"
+        data-pt="Por que multilíngue vence"
+        data-hi="मल्टीलैंग्वेज क्यों जीतता है"
+      >
+        Why multilingual wins
+      </div>
+      <h2
+        data-en="Your customers speak more than one language. Your website should too."
+        data-es="Sus clientes hablan más de un idioma. Su sitio web también debería."
+        data-pt="Seus clientes falam mais de um idioma. Seu site também deveria."
+        data-hi="आपके ग्राहक एक से ज़्यादा भाषाएँ बोलते हैं। आपकी वेबसाइट को भी बोलनी चाहिए।"
+      >
+        Your customers speak more than one language. Your website should too.
+      </h2>
+      <p
+        data-en="The DFW metro has some of the largest Spanish, Portuguese, and Hindi-speaking communities in Texas. A multilingual site is not a nice extra. It is how you win the customers your competitors cannot even talk to."
+        data-es="El área metropolitana del DFW tiene algunas de las comunidades de habla hispana, portuguesa e hindi más grandes de Texas. Un sitio multilingüe no es un lujo. Es cómo usted gana los clientes que su competencia ni siquiera puede atender."
+        data-pt="O DFW tem algumas das maiores comunidades de falantes de espanhol, português e híndi do Texas. Um site multilíngue não é luxo. É como você ganha os clientes que seus concorrentes nem conseguem atender."
+        data-hi="DFW में स्पैनिश, पुर्तगाली और हिन्दी बोलने वालों की टेक्सस की सबसे बड़ी कम्युनिटीज़ में से कुछ बसती हैं। मल्टीलैंग्वेज साइट कोई दिखावा नहीं है। यही तरीका है उन ग्राहकों को जीतने का, जिनसे आपके कॉम्पिटिटर बात तक नहीं कर सकते।"
+      >
+        The DFW metro has some of the largest Spanish, Portuguese, and Hindi-speaking communities in
+        Texas. A multilingual site is not a nice extra. It is how you win the customers your
+        competitors cannot even talk to.
+      </p>
+      <p
+        data-en="Proof? This page speaks four languages. Pick one at the top and watch the whole site switch. That is exactly what your customers will get."
+        data-es="¿Prueba? Esta página habla cuatro idiomas. Elija uno arriba y vea cómo todo el sitio cambia. Eso es exactamente lo que sus clientes tendrán."
+        data-pt="Prova? Esta página fala quatro idiomas. Escolha um lá em cima e veja o site inteiro mudar. É exatamente isso que seus clientes vão ter."
+        data-hi="सबूत? यह पेज खुद चार भाषाएँ बोलता है। ऊपर से कोई भी चुनिए और पूरी साइट को बदलते देखिए। आपके ग्राहकों को बिल्कुल यही मिलेगा।"
+      >
+        Proof? This page speaks four languages. Pick one at the top and watch the whole site switch.
+        That is exactly what your customers will get.
+      </p>
+    </div>
+    <div class="stat-tiles">
+      <div class="stat-tile">
+        <div
+          class="big"
+          data-en="4 languages"
+          data-es="4 idiomas"
+          data-pt="4 idiomas"
+          data-hi="4 भाषाएँ"
+        >
+          4 languages
+        </div>
+        <div
+          class="label"
+          data-en="Reach every customer in their own language"
+          data-es="Llegue a cada cliente en su propio idioma"
+          data-pt="Alcance cada cliente no idioma dele"
+          data-hi="हर ग्राहक तक उसकी अपनी भाषा में पहुँचें"
+        >
+          Reach every customer in their own language
+        </div>
+      </div>
+      <div class="stat-tile">
+        <div
+          class="big"
+          data-en="1 person"
+          data-es="1 persona"
+          data-pt="1 pessoa"
+          data-hi="1 इंसान"
+        >
+          1 person
+        </div>
+        <div
+          class="label"
+          data-en="You always talk to the developer"
+          data-es="Siempre habla con el desarrollador"
+          data-pt="Você sempre fala com o desenvolvedor"
+          data-hi="आप हमेशा डेवलपर से ही बात करते हैं"
+        >
+          You always talk to the developer
+        </div>
+      </div>
+      <div class="stat-tile">
+        <div class="big">100%</div>
+        <div
+          class="label"
+          data-en="Mobile friendly, every project"
+          data-es="Optimizado para celular, cada proyecto"
+          data-pt="Otimizado para celular, todo projeto"
+          data-hi="हर प्रोजेक्ट मोबाइल-फ्रेंडली"
+        >
+          Mobile friendly, every project
+        </div>
+      </div>
+      <div class="stat-tile">
+        <div class="big" data-en="Local" data-es="Local" data-pt="Local" data-hi="लोकल">Local</div>
+        <div
+          class="label"
+          data-en="Based in Fort Worth, TX"
+          data-es="Ubicado en Fort Worth, TX"
+          data-pt="Baseado em Fort Worth, TX"
+          data-hi="Fort Worth, TX में स्थित"
+        >
+          Based in Fort Worth, TX
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="maintenance">
+  <div class="section-head">
+    <div
+      class="mono"
+      data-en="After launch"
+      data-es="Después del lanzamiento"
+      data-pt="Após o lançamento"
+      data-hi="लॉन्च के बाद"
+    >
+      After launch
+    </div>
+    <h2
+      data-en="I don't disappear when the site goes live"
+      data-es="No desaparezco cuando el sitio se publica"
+      data-pt="Não desapareço quando o site vai ao ar"
+      data-hi="साइट लाइव होते ही मैं गायब नहीं हो जाता"
+    >
+      I don't disappear when the site goes live
+    </h2>
+  </div>
+  <div class="plans">
+    <div class="plan">
+      <h3
+        data-en="Essential Care"
+        data-es="Cuidado esencial"
+        data-pt="Cuidado Essencial"
+        data-hi="एसेंशियल केयर"
+      >
+        Essential Care
+      </h3>
+      <div class="price">
+        $75<small data-en="per month" data-es="por mes" data-pt="por mês" data-hi="प्रति माह"
+          >per month</small
+        >
+      </div>
+      <ul>
+        <li
+          data-en="Hosting and domain management"
+          data-es="Hospedaje y manejo de dominio"
+          data-pt="Hospedagem e gestão de domínio"
+          data-hi="होस्टिंग और डोमेन की देखरेख"
+        >
+          Hosting and domain management
+        </li>
+        <li
+          data-en="Security updates and backups"
+          data-es="Actualizaciones de seguridad y respaldos"
+          data-pt="Atualizações de segurança e backups"
+          data-hi="सिक्योरिटी अपडेट और बैकअप"
+        >
+          Security updates and backups
+        </li>
+        <li
+          data-en="1 content change per month"
+          data-es="1 cambio de contenido al mes"
+          data-pt="1 alteração de conteúdo por mês"
+          data-hi="महीने में 1 कंटेंट बदलाव"
+        >
+          1 content change per month
+        </li>
+        <li
+          data-en="Email support"
+          data-es="Soporte por correo"
+          data-pt="Suporte por e-mail"
+          data-hi="ईमेल सपोर्ट"
+        >
+          Email support
+        </li>
+      </ul>
+    </div>
+    <div class="plan featured">
+      <div
+        class="mono"
+        data-en="Recommended"
+        data-es="Recomendado"
+        data-pt="Recomendado"
+        data-hi="मेरा सुझाव"
+      >
+        Recommended
+      </div>
+      <h3
+        data-en="Growth Care"
+        data-es="Cuidado de crecimiento"
+        data-pt="Cuidado de Crescimento"
+        data-hi="ग्रोथ केयर"
+      >
+        Growth Care
+      </h3>
+      <div class="price">
+        $150<small data-en="per month" data-es="por mes" data-pt="por mês" data-hi="प्रति माह"
+          >per month</small
+        >
+      </div>
+      <ul>
+        <li
+          data-en="Everything in Essential Care"
+          data-es="Todo lo del plan esencial"
+          data-pt="Tudo do plano essencial"
+          data-hi="एसेंशियल केयर की हर चीज़"
+        >
+          Everything in Essential Care
+        </li>
+        <li
+          data-en="Up to 4 content changes per month"
+          data-es="Hasta 4 cambios de contenido al mes"
+          data-pt="Até 4 alterações de conteúdo por mês"
+          data-hi="महीने में 4 कंटेंट बदलाव तक"
+        >
+          Up to 4 content changes per month
+        </li>
+        <li
+          data-en="Priority response, same day"
+          data-es="Respuesta prioritaria el mismo día"
+          data-pt="Resposta prioritária no mesmo dia"
+          data-hi="उसी दिन प्राथमिकता से जवाब"
+        >
+          Priority response, same day
+        </li>
+        <li
+          data-en="Monthly performance check"
+          data-es="Revisión mensual de rendimiento"
+          data-pt="Revisão mensal de desempenho"
+          data-hi="हर महीने परफ़ॉर्मेंस जाँच"
+        >
+          Monthly performance check
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-panel">
+    <div
+      class="mono"
+      data-en="Get started"
+      data-es="Empiece hoy"
+      data-pt="Comece hoje"
+      data-hi="आज ही शुरू करें"
+    >
+      Get started
+    </div>
+    <h2
+      data-en="Ready when you are"
+      data-es="Listo cuando usted lo esté"
+      data-pt="Pronto quando você estiver"
+      data-hi="आप जब तैयार, मैं तैयार"
+    >
+      Ready when you are
+    </h2>
+    <p
+      data-en="Free 15 minute call, no pressure. Tell me what you do and I will tell you exactly what a website can do for your business, and what it will cost."
+      data-es="Llamada gratis de 15 minutos, sin compromiso. Cuénteme a qué se dedica y le diré exactamente qué puede hacer un sitio web por su negocio, y cuánto costará."
+      data-pt="Ligação grátis de 15 minutos, sem compromisso. Me conte o que você faz e eu te digo exatamente o que um site pode fazer pelo seu negócio, e quanto vai custar."
+      data-hi="15 मिनट की मुफ़्त कॉल, कोई दबाव नहीं। बताइए आप क्या करते हैं, और मैं साफ़ बताऊँगा कि एक वेबसाइट आपके बिज़नेस के लिए क्या कर सकती है और कितना खर्च आएगा।"
+    >
+      Free 15 minute call, no pressure. Tell me what you do and I will tell you exactly what a
+      website can do for your business, and what it will cost.
+    </p>
+    <div class="contact-methods">
+      <a
+        class="btn btn-red"
+        href="mailto:jorge.juarez087@gmail.com"
+        data-en="Email me"
+        data-es="Envíeme un correo"
+        data-pt="Me mande um e-mail"
+        data-hi="ईमेल करें"
+        >Email me</a
+      >
+      <a
+        id="wa-link"
+        class="btn btn-wa"
+        href="https://wa.me/18178225269?text=Hi%20Jorge%2C%20I%20saw%20your%20page%20and%20I'm%20interested%20in%20a%20website."
+        target="_blank"
+        rel="noopener"
+        data-en="WhatsApp me"
+        data-es="Escríbame por WhatsApp"
+        data-pt="Chama no WhatsApp"
+        data-hi="WhatsApp करें"
+        >WhatsApp me</a
+      >
+      <a
+        class="btn btn-line"
+        href="tel:+18178225269"
+        data-en="Call or text"
+        data-es="Llame o mande texto"
+        data-pt="Ligue ou mande mensagem"
+        data-hi="कॉल या टेक्स्ट करें"
+        >Call or text</a
+      >
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a class="logo" href="#" aria-label="Jorge home">
+    <svg class="logo-mark" viewBox="0 0 48 48" aria-hidden="true" style="width: 30px; height: 30px">
+      <rect
+        x="1.5"
+        y="1.5"
+        width="45"
+        height="45"
+        rx="7"
+        fill="none"
+        stroke="#E3312B"
+        stroke-width="3"
+      />
+      <rect x="9" y="9" width="14" height="14" fill="#E3312B" />
+      <rect x="25" y="9" width="14" height="14" fill="#2A2A30" />
+      <rect x="9" y="25" width="14" height="14" fill="#2A2A30" />
+      <path
+        d="M32 25 v9.5 a4.5 4.5 0 0 1 -4.5 4.5 h-2.5"
+        fill="none"
+        stroke="#F5F4F2"
+        stroke-width="4"
+        stroke-linecap="square"
+      />
+    </svg>
+    <span class="logo-word" style="font-size: 1rem">JORGE<i>.</i></span>
+  </a>
+  <p
+    data-en="Fort Worth, Texas. Websites in English, en español, em português और हिन्दी में भी।"
+    data-es="Fort Worth, Texas. Websites in English, en español, em português और हिन्दी में भी।"
+    data-pt="Fort Worth, Texas. Websites in English, en español, em português और हिन्दी में भी।"
+    data-hi="Fort Worth, Texas. Websites in English, en español, em português और हिन्दी में भी।"
+  >
+    Fort Worth, Texas. Websites in English, en español, em português और हिन्दी में भी।
+  </p>
+</footer>

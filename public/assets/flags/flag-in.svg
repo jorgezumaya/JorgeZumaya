@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 24">
+  <defs>
+    <clipPath id="in-clip">
+      <rect width="36" height="24" rx="3"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#in-clip)">
+    <!-- Saffron / white / green bands -->
+    <rect width="36" height="8" fill="#FF9933"/>
+    <rect y="8" width="36" height="8" fill="#fff"/>
+    <rect y="16" width="36" height="8" fill="#138808"/>
+    <!-- Ashoka Chakra — simplified ring, hub, and 12 spokes -->
+    <circle cx="18" cy="12" r="3.1" fill="none" stroke="#000080" stroke-width="0.65"/>
+    <circle cx="18" cy="12" r="0.6" fill="#000080"/>
+    <g stroke="#000080" stroke-width="0.45">
+      <line x1="18" y1="9.2"  x2="18" y2="14.8"/>
+      <line x1="15.2" y1="12" x2="20.8" y2="12"/>
+      <line x1="16" y1="9.6"  x2="20" y2="14.4"/>
+      <line x1="20" y1="9.6"  x2="16" y2="14.4"/>
+      <line x1="15.6" y1="10.6" x2="20.4" y2="13.4"/>
+      <line x1="20.4" y1="10.6" x2="15.6" y2="13.4"/>
+    </g>
+  </g>
+</svg>

@@ -31,8 +31,9 @@ jobs:
           mkdir -p src/environments
           cat > src/environments/environment.ts << 'EOF'
           function required(value: string | undefined, name: string): string {
-            if (!value) throw new Error(`Missing env var: ${name}`);
-            return value;
+            // Trim: secrets pasted with a trailing newline break Storage URLs (%0A in bucket name)
+            if (!value?.trim()) throw new Error(`Missing env var: ${name}`);
+            return value.trim();
           }
           export const environment = {
             production: false,
@@ -45,7 +46,7 @@ jobs:
               appId: required(process.env['NG_APP_FIREBASE_APP_ID'], 'NG_APP_FIREBASE_APP_ID'),
               measurementId: required(process.env['NG_APP_FIREBASE_MEASUREMENT_ID'], 'NG_APP_FIREBASE_MEASUREMENT_ID'),
             },
-            recaptchaSiteKey: process.env['NG_APP_RECAPTCHA_SITE_KEY'] ?? '',
+            recaptchaSiteKey: (process.env['NG_APP_RECAPTCHA_SITE_KEY'] ?? '').trim(),
           };
           EOF
           cp src/environments/environment.ts src/environments/environment.prod.ts

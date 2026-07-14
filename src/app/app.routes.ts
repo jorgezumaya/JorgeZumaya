@@ -3,6 +3,12 @@ import { ShellComponent } from './core/layout/shell.component';
 
 export const routes: Routes = [
   {
+    path: 'prospects',
+    loadComponent: () =>
+      import('./features/prospects/prospects.component').then((m) => m.ProspectsComponent),
+    title: 'JORGE | Websites That Win Customers | Sitios web que ganan clientes',
+  },
+  {
     path: '',
     component: ShellComponent,
     children: [
