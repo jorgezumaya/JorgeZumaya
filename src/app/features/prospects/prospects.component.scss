@@ -7,9 +7,11 @@
   --p-grey: #a6a6ae;
   --p-red: #e3312b;
   --p-red-deep: #a81f1b;
+  --p-wa: #25d366;
+  --p-wa-deep: #1da851;
 
   display: block;
-  font-family: 'Archivo', sans-serif;
+  font-family: 'Archivo', 'Noto Sans Devanagari', sans-serif;
   background: var(--p-black);
   color: var(--p-white);
   line-height: 1.65;
@@ -23,7 +25,7 @@
 }
 
 :host .mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'IBM Plex Mono', 'Noto Sans Devanagari', monospace;
   font-size: 0.76rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -34,9 +36,16 @@
 :host h1,
 :host h2,
 :host h3 {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
   line-height: 1.05;
   text-transform: uppercase;
+}
+/* Devanagari needs headroom for matras — the tight Latin line-height clips them */
+:host(.lang-hi) h1,
+:host(.lang-hi) h2,
+:host(.lang-hi) h3 {
+  line-height: 1.3;
+  font-weight: 900;
 }
 
 /* ---------- Logo ---------- */
@@ -75,30 +84,80 @@
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--p-line);
 }
-:host .lang-toggle {
-  display: flex;
-  border: 1px solid var(--p-line);
-  border-radius: 6px;
-  overflow: hidden;
+:host .lang-menu {
+  position: relative;
 }
-:host .lang-toggle button {
-  font-family: 'IBM Plex Mono', monospace;
+:host .lang-menu button {
+  font-family: 'IBM Plex Mono', 'Noto Sans Devanagari', monospace;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: 7px 15px;
   border: none;
   background: transparent;
   color: var(--p-grey);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s,
+    border-color 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
-:host .lang-toggle button.active {
-  background: var(--p-red);
-  color: #fff;
-}
-:host .lang-toggle button:focus-visible {
+:host .lang-menu button:focus-visible {
   outline: 2px solid var(--p-white);
   outline-offset: -2px;
+}
+:host .lang-menu .flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  display: block;
+  flex-shrink: 0;
+}
+:host .lang-menu .lang-current {
+  border: 1px solid var(--p-line);
+  border-radius: 6px;
+  padding: 8px 13px;
+  color: var(--p-white);
+}
+:host .lang-menu .lang-current:hover {
+  border-color: var(--p-red);
+}
+:host .lang-current .chevron {
+  width: 10px;
+  height: 6px;
+  color: var(--p-grey);
+  transition: transform 0.15s;
+}
+:host .lang-current .chevron.open {
+  transform: rotate(180deg);
+}
+:host .lang-options {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  min-width: 172px;
+  display: flex;
+  flex-direction: column;
+  background: var(--p-panel);
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+}
+:host .lang-options button {
+  padding: 11px 15px;
+  text-align: left;
+  width: 100%;
+}
+:host .lang-options button:hover {
+  background: var(--p-panel-2);
+  color: var(--p-white);
+}
+:host .lang-options button.active {
+  background: var(--p-red);
+  color: #fff;
 }
 
 /* ---------- Hero ---------- */
@@ -117,14 +176,15 @@
   padding: 2px;
   pointer-events: none;
 }
-:host .tile-field .tile {
+/* ::ng-deep — tiles are created with createElement, outside Angular's style scoping */
+:host .tile-field ::ng-deep .tile {
   border: 1px solid #17171a;
   transition: background 0.5s ease;
 }
-:host .tile-field .tile.lit {
+:host .tile-field ::ng-deep .tile.lit {
   background: var(--p-panel-2);
 }
-:host .tile-field .tile.lit-red {
+:host .tile-field ::ng-deep .tile.lit-red {
   background: var(--p-red);
   opacity: 0.16;
 }
@@ -160,6 +220,13 @@
   max-width: 850px;
   margin-bottom: 24px;
 }
+/* Portuguese and Hindi headline copy runs longer — tighten so it wraps like the EN version */
+:host(.lang-pt) .hero h1,
+:host(.lang-hi) .hero h1 {
+  font-size: clamp(2.1rem, 5.6vw, 3.8rem);
+}
+/* ::ng-deep — the language swap injects this span via innerHTML, outside Angular's style scoping */
+:host .hero h1 ::ng-deep .red,
 :host .hero h1 .red {
   color: var(--p-red);
 }
@@ -182,7 +249,10 @@
   border-radius: 8px;
   font-size: 1rem;
   letter-spacing: 0.02em;
-  transition: transform 0.15s, background 0.15s, color 0.15s;
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    color 0.15s;
 }
 :host .btn:focus-visible {
   outline: 2px solid var(--p-white);
@@ -203,6 +273,20 @@
 :host .btn-line:hover {
   border-color: var(--p-red);
   color: var(--p-red);
+}
+:host .btn-wa {
+  background: var(--p-wa);
+  color: #fff;
+}
+:host .btn-wa:hover {
+  background: var(--p-wa-deep);
+  transform: translateY(-2px);
+}
+/* WhatsApp dominates in the Spanish, Portuguese, and Hindi-speaking communities — lead with it */
+:host(.lang-es) .contact-methods .btn-wa,
+:host(.lang-pt) .contact-methods .btn-wa,
+:host(.lang-hi) .contact-methods .btn-wa {
+  order: -1;
 }
 
 /* ---------- Sections ---------- */
@@ -283,7 +367,7 @@
   flex-grow: 1;
 }
 :host .price {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
   font-size: 1.6rem;
   margin-top: 22px;
   color: var(--p-white);
@@ -293,7 +377,7 @@
   color: var(--p-red);
 }
 :host .price small {
-  font-family: 'Archivo', sans-serif;
+  font-family: 'Archivo', 'Noto Sans Devanagari', sans-serif;
   font-weight: 500;
   font-size: 0.78rem;
   color: var(--p-grey);
@@ -325,7 +409,8 @@
   border-radius: 10px;
   position: relative;
   overflow: hidden;
-  background: repeating-linear-gradient(0deg, var(--p-panel-2) 0 56px, var(--p-black) 56px 60px),
+  background:
+    repeating-linear-gradient(0deg, var(--p-panel-2) 0 56px, var(--p-black) 56px 60px),
     repeating-linear-gradient(90deg, transparent 0 56px, var(--p-black) 56px 60px);
   border: 1px solid var(--p-line);
 }
@@ -375,7 +460,7 @@
   padding: 28px 22px;
 }
 :host .stat-tile .big {
-  font-family: 'Archivo Black', sans-serif;
+  font-family: 'Archivo Black', 'Noto Sans Devanagari', sans-serif;
   font-size: 1.7rem;
   color: var(--p-red);
 }
