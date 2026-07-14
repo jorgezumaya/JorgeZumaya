@@ -6,24 +6,19 @@
       <p class="info__sub">Have a project in mind? Want to connect? Drop me a line.</p>
       <ul class="links">
         <li>
-          <a href="mailto:jorge.juarez87@me.com" class="link-chip">
+          <a [href]="'mailto:' + social.email" class="link-chip">
             <span class="link-chip__label">Email</span>
             <span class="link-chip__value">jorge.juarez87&#64;me.com</span>
           </a>
         </li>
         <li>
-          <a
-            href="https://www.linkedin.com/in/jorgezumaya/"
-            target="_blank"
-            rel="noopener"
-            class="link-chip"
-          >
+          <a [href]="social.linkedin" target="_blank" rel="noopener" class="link-chip">
             <span class="link-chip__label">LinkedIn</span>
             <span class="link-chip__value">/in/jorgezumaya</span>
           </a>
         </li>
         <li>
-          <a href="https://github.com/jorgezumaya" target="_blank" rel="noopener" class="link-chip">
+          <a [href]="social.github" target="_blank" rel="noopener" class="link-chip">
             <span class="link-chip__label">GitHub</span>
             <span class="link-chip__value">/jorgezumaya</span>
           </a>

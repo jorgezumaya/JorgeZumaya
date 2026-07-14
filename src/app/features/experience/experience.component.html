@@ -1,7 +1,6 @@
 <section class="page">
   <header class="page__header" appReveal>
-    <p class="eyebrow">Career</p>
-    <h1>Experience</h1>
+    <app-page-header eyebrow="Career" title="Experience" />
   </header>
 
   <!-- Timeline -->
@@ -30,11 +29,7 @@
                     <li>{{ bullet }}</li>
                   }
                 </ul>
-                <ul class="timeline__stack">
-                  @for (tag of role.stack; track tag) {
-                    <li class="chip">{{ tag }}</li>
-                  }
-                </ul>
+                <app-chip-list [items]="role.stack" />
               </div>
             </div>
           }
@@ -67,11 +62,7 @@
       @for (cat of techStack; track cat.label) {
         <div class="tech-stack__category">
           <p class="tech-stack__label">{{ cat.label }}</p>
-          <ul class="tech-stack__chips">
-            @for (chip of cat.chips; track chip) {
-              <li class="chip">{{ chip }}</li>
-            }
-          </ul>
+          <app-chip-list [items]="cat.chips" />
         </div>
       }
 

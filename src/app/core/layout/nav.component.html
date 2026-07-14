@@ -28,9 +28,11 @@
 
   <!-- Desktop: inline links -->
   <ul class="nav__links nav__links--desktop">
-    <li><a routerLink="/experience" routerLinkActive="active">Experience</a></li>
-    <li><a routerLink="/work" routerLinkActive="active">Work</a></li>
-    <li><a routerLink="/gallery" routerLinkActive="active">Gallery</a></li>
+    @for (link of navLinks; track link.path) {
+      <li>
+        <a [routerLink]="link.path" routerLinkActive="active">{{ link.label }}</a>
+      </li>
+    }
     <li><a routerLink="/contact" routerLinkActive="active" class="nav__cta">Contact</a></li>
   </ul>
 
@@ -54,8 +56,10 @@
 
   <!-- Mobile: collapsible links (in-flow) -->
   <ul class="nav__links nav__links--mobile" [class.is-open]="open()">
-    <li><a routerLink="/experience" routerLinkActive="active" (click)="close()">Experience</a></li>
-    <li><a routerLink="/work" routerLinkActive="active" (click)="close()">Work</a></li>
-    <li><a routerLink="/gallery" routerLinkActive="active" (click)="close()">Gallery</a></li>
+    @for (link of navLinks; track link.path) {
+      <li>
+        <a [routerLink]="link.path" routerLinkActive="active" (click)="close()">{{ link.label }}</a>
+      </li>
+    }
   </ul>
 </nav>

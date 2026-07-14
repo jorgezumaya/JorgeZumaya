@@ -1,9 +1,11 @@
+@use '../../../styles/breakpoints' as bp;
+
 .page {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: var(--space-8) var(--container-pad);
 
-  @media (min-width: 768px) {
+  @include bp.mq-up(bp.$bp-lg) {
     padding: var(--space-16) var(--container-pad);
   }
 }
@@ -12,55 +14,17 @@
   margin-bottom: var(--space-12);
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: var(--space-3);
-}
-
-h1 {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
-// ── Reveal animation ───────────────────────────────────────
-:host ::ng-deep .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity var(--dur-slow) var(--ease-out),
-    transform var(--dur-slow) var(--ease-out);
-
-  &.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :host ::ng-deep .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
-
 // ── Grid ───────────────────────────────────────────────────
 .grid {
   display: grid;
   gap: 4px;
   grid-template-columns: 1fr;
 
-  @media (min-width: 640px) {
+  @include bp.mq-up(bp.$bp-md) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 1024px) {
+  @include bp.mq-up(bp.$bp-xl) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -143,13 +107,6 @@ h1 {
   color: var(--color-text);
   line-height: 1.4;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-}
-
-.tile__likes {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: var(--space-1);
 }
 
 // ── Empty state ────────────────────────────────────────────

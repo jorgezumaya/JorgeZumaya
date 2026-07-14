@@ -1,0 +1,17 @@
+// Shared breakpoint scale — keeps media queries consistent across components.
+$bp-sm: 480px;
+$bp-md: 640px;
+$bp-lg: 768px;
+$bp-xl: 1024px;
+
+@mixin mq-up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin mq-down($bp) {
+  @media (max-width: $bp) {
+    @content;
+  }
+}

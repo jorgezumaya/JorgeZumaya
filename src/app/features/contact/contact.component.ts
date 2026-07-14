@@ -1,18 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
-
-const URL_PATTERN = /https?:\/\/|www\./i;
-
-function noLinks(control: AbstractControl): ValidationErrors | null {
-  return URL_PATTERN.test(control.value ?? '') ? { noLinks: true } : null;
-}
+import { SOCIAL_LINKS } from '../../shared/constants';
+import { createToast } from '../../shared/forms/toast';
+import { noLinks } from '../../shared/forms/validators';
+import { fieldError } from '../../shared/forms/field-error';
+import { markAllDirty } from '../../shared/forms/mark-all-dirty';
 
 @Component({
   selector: 'app-contact',
@@ -24,10 +17,12 @@ function noLinks(control: AbstractControl): ValidationErrors | null {
 export class ContactComponent {
   private fb = inject(FormBuilder);
   private svc = inject(ContactService);
+  private readonly toastState = createToast(4000);
   sending = signal(false);
-  toast = signal<'success' | 'error' | null>(null);
+  readonly toast = this.toastState.toast;
 
   readonly MESSAGE_MAX = 2000;
+  readonly social = SOCIAL_LINKS;
 
   form = this.fb.nonNullable.group({
     name: ['', Validators.required],
@@ -44,40 +39,25 @@ export class ContactComponent {
     return this.form.controls.message.value.length;
   }
 
-  fieldError(field: 'name' | 'email' | 'subject' | 'message'): string | null {
-    const ctrl = this.form.controls[field];
-    if (!ctrl.dirty || ctrl.valid) return null;
-    if (ctrl.hasError('required')) return 'This field is required.';
-    if (ctrl.hasError('email')) return 'Please enter a valid email address.';
-    if (ctrl.hasError('noLinks')) return 'Links are not permitted in the subject line.';
-    if (ctrl.hasError('minlength')) return 'Message must be at least 10 characters.';
-    if (ctrl.hasError('maxlength')) return `Message cannot exceed ${this.MESSAGE_MAX} characters.`;
-    return null;
+  fieldError(field: 'name' | 'email' | 'subject' | 'message') {
+    return fieldError(this.form.controls[field]);
   }
 
   async submit() {
     this.form.markAllAsTouched();
-    this.form.controls.name.markAsDirty();
-    this.form.controls.email.markAsDirty();
-    this.form.controls.subject.markAsDirty();
-    this.form.controls.message.markAsDirty();
+    markAllDirty(this.form);
     if (this.form.invalid || this.form.value.website) return;
     this.sending.set(true);
     try {
       const { website, ...payload } = this.form.getRawValue();
       await this.svc.submit(payload);
       this.form.reset();
-      this.showToast('success');
+      this.toastState.show('success');
     } catch (err) {
       console.error('[contact] error:', err);
-      this.showToast('error');
+      this.toastState.show('error');
     } finally {
       this.sending.set(false);
     }
-  }
-
-  private showToast(type: 'success' | 'error') {
-    this.toast.set(type);
-    setTimeout(() => this.toast.set(null), 4000);
   }
 }

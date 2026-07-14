@@ -216,14 +216,14 @@
   background: var(--p-red);
 }
 :host .hero h1 {
-  font-size: clamp(2.5rem, 7vw, 4.6rem);
-  max-width: 850px;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  max-width: 800px;
   margin-bottom: 24px;
 }
-/* Portuguese and Hindi headline copy runs longer — tighten so it wraps like the EN version */
+/* Portuguese and Hindi headline copy runs longer — tighten a touch more so it wraps cleanly */
 :host(.lang-pt) .hero h1,
 :host(.lang-hi) .hero h1 {
-  font-size: clamp(2.1rem, 5.6vw, 3.8rem);
+  font-size: clamp(1.85rem, 4.4vw, 3.1rem);
 }
 /* ::ng-deep — the language swap injects this span via innerHTML, outside Angular's style scoping */
 :host .hero h1 ::ng-deep .red,
@@ -527,6 +527,77 @@
   margin: 0 auto 32px;
   color: var(--p-grey);
 }
+/* Lead form — submits through the same pipeline as the portfolio contact form */
+:host .lead-form {
+  max-width: 440px;
+  margin: 0 auto 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+:host .lead-form input,
+:host .lead-form textarea {
+  font-family: 'Archivo', 'Noto Sans Devanagari', sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--p-panel);
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+  color: var(--p-white);
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+:host .lead-form input::placeholder,
+:host .lead-form textarea::placeholder {
+  color: var(--p-grey);
+}
+:host .lead-form input:focus,
+:host .lead-form textarea:focus {
+  outline: none;
+  border-color: var(--p-red);
+  background: var(--p-panel-2);
+}
+:host .lead-form input.invalid,
+:host .lead-form textarea.invalid {
+  border-color: var(--p-red);
+}
+:host .lead-form textarea {
+  resize: vertical;
+  min-height: 84px;
+}
+:host .lead-form .btn {
+  border: none;
+  cursor: pointer;
+  margin-top: 2px;
+}
+:host .lead-form .btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+/* Honeypot — off-screen, never shown to real users */
+:host .lead-form .hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+:host .form-msg {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+:host .form-msg.success {
+  color: #4ade80;
+}
+:host .form-msg.error {
+  color: var(--p-red);
+}
+
 :host .contact-methods {
   display: flex;
   gap: 14px;

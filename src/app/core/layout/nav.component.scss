@@ -1,3 +1,5 @@
+@use '../../../styles/breakpoints' as bp;
+
 .nav {
   position: sticky;
   top: 0;
@@ -110,7 +112,7 @@
   }
 
   // ── Mobile (≤ 768px) ────────────────────────────────────────
-  @media (max-width: 768px) {
+  @include bp.mq-down(bp.$bp-lg) {
     // Hide desktop horizontal links
     &__links--desktop {
       display: none;

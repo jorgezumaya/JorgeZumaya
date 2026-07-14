@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RevealDirective } from '../../core/directives/reveal.directive';
+import { PageHeaderComponent } from '../../shared/ui/page-header.component';
+import { ChipListComponent } from '../../shared/ui/chip-list.component';
 
 interface Role {
   title: string;
@@ -42,7 +44,7 @@ interface Language {
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [RevealDirective],
+  imports: [RevealDirective, PageHeaderComponent, ChipListComponent],
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
 })

@@ -12,7 +12,7 @@ Personal portfolio site for Jorge Zumaya, Full Stack Engineer at Fidelity Invest
 - **Framework**: Angular 21, standalone components, signals, SSR (`@angular/ssr`)
 - **Styling**: SCSS + CSS custom properties (design tokens defined in `.claude/design.md`)
 - **Animation**: GSAP + ScrollTrigger, Angular Animations, View Transitions API
-- **Icons**: Lucide Angular
+- **Icons**: Hand-rolled inline SVG (no icon library dependency)
 - **Forms**: Reactive Forms
 - **Hosting**: Firebase Hosting (custom domain: jorgezumaya.me via Cloudflare)
 - **DB**: Firestore (contact submissions, gallery metadata)
