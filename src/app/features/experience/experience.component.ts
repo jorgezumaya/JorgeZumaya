@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { RevealDirective } from '../../core/directives/reveal.directive';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
 import { ChipListComponent } from '../../shared/ui/chip-list.component';
@@ -44,14 +45,11 @@ interface Language {
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [RevealDirective, PageHeaderComponent, ChipListComponent],
+  imports: [RevealDirective, PageHeaderComponent, ChipListComponent, RouterLink],
   templateUrl: './experience.component.html',
   styleUrl: './experience.component.scss',
 })
 export class ExperienceComponent {
-  readonly resumeUrl =
-    'https://firebasestorage.googleapis.com/v0/b/jorgezumaya-portfolio.firebasestorage.app/o/Resume%2FJorgeZumayaResume2026.pdf?alt=media';
-
   companies: Company[] = [
     {
       name: 'Fidelity Investments',

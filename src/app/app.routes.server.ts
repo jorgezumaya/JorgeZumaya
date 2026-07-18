@@ -14,6 +14,9 @@ export const serverRoutes: ServerRoute[] = [
   { path: ROUTE_PATHS.contact, renderMode: RenderMode.Prerender },
   // Prospects is a static bilingual landing page shared as a direct link — prerender.
   { path: ROUTE_PATHS.prospects, renderMode: RenderMode.Prerender },
+  // Resume needs a live Storage download URL at request time, same as gallery —
+  // render fully client-side rather than a mismatched prerendered shell.
+  { path: ROUTE_PATHS.resume, renderMode: RenderMode.Client },
   // Fallback — no SSR server is deployed, so client-render rather than
   // falling back to a mismatched static shell.
   { path: '**', renderMode: RenderMode.Client },

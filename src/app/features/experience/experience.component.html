@@ -98,23 +98,14 @@
     </div>
   </div>
 
-  <!-- Resume Download -->
+  <!-- Resume -->
   <div class="resume-cta" appReveal>
     <div class="resume-cta__inner">
       <div class="resume-cta__copy">
         <p class="resume-cta__label">Want the full picture?</p>
-        <p class="resume-cta__sub">Full résumé available as a PDF.</p>
+        <p class="resume-cta__sub">View my full résumé.</p>
       </div>
-      <!-- TODO: update href to Firebase Storage URL once resume PDF is uploaded -->
-      <a
-        [href]="resumeUrl"
-        target="_blank"
-        rel="noopener"
-        download="Jorge-Zumaya-Resume.pdf"
-        class="resume-cta__btn"
-      >
-        Download Résumé ↓
-      </a>
+      <a routerLink="/resume" class="resume-cta__btn"> View Résumé → </a>
     </div>
   </div>
 </section>
