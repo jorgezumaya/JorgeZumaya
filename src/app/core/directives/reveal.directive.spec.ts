@@ -25,7 +25,7 @@ describe('RevealDirective', () => {
 
     vi.stubGlobal(
       'IntersectionObserver',
-      vi.fn().mockImplementation((callback: IntersectionObserverCallback) => {
+      vi.fn().mockImplementation(function (this: unknown, callback: IntersectionObserverCallback) {
         capturedCallback = callback;
         return {
           observe: observeSpy,
@@ -71,7 +71,7 @@ describe('RevealDirective', () => {
 
     const el: HTMLElement = fixture.nativeElement.querySelector('div');
     capturedCallback!(
-      [{ isIntersecting: false, target: el } as IntersectionObserverEntry],
+      [{ isIntersecting: false, target: el } as unknown as IntersectionObserverEntry],
       {} as IntersectionObserver,
     );
 

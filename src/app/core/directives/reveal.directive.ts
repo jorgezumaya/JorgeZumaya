@@ -1,5 +1,5 @@
 import { Directive, ElementRef, inject, OnDestroy, OnInit } from '@angular/core';
-import { injectIsBrowser } from '../../shared/util/platform';
+import { injectIsBrowser } from '../../shared/utils/platform';
 
 @Directive({
   selector: '[appReveal]',

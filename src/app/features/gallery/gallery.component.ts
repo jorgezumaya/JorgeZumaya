@@ -3,7 +3,7 @@ import { GalleryService, Photo } from '../../core/services/gallery.service';
 import { PhotoModalComponent } from './photo-modal.component';
 import { RevealDirective } from '../../core/directives/reveal.directive';
 import { PageHeaderComponent } from '../../shared/ui/page-header.component';
-import { injectIsBrowser } from '../../shared/util/platform';
+import { injectIsBrowser } from '../../shared/utils/platform';
 
 @Component({
   selector: 'app-gallery',

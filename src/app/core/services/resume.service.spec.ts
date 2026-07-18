@@ -3,22 +3,18 @@ import { Storage } from '@angular/fire/storage';
 import { vi } from 'vitest';
 import { ResumeService } from './resume.service';
 
-const { listAllMock, getDownloadURLMock } = vi.hoisted(() => ({
+const { refMock, listAllMock, getDownloadURLMock } = vi.hoisted(() => ({
+  refMock: vi.fn().mockReturnValue({ fullPath: 'Resume' }),
   listAllMock: vi.fn(),
   getDownloadURLMock: vi.fn(),
 }));
 
-vi.mock('@angular/fire/storage', async () => {
-  const actual = await vi.importActual<typeof import('@angular/fire/storage')>(
-    '@angular/fire/storage',
-  );
-  return {
-    ...actual,
-    ref: vi.fn().mockReturnValue({ fullPath: 'Resume' }),
-    listAll: listAllMock,
-    getDownloadURL: getDownloadURLMock,
-  };
-});
+vi.mock('@angular/fire/storage', () => ({
+  Storage: class {},
+  ref: refMock,
+  listAll: listAllMock,
+  getDownloadURL: getDownloadURLMock,
+}));
 
 describe('ResumeService', () => {
   let service: ResumeService;
@@ -47,10 +43,7 @@ describe('ResumeService', () => {
 
   it('should resolve the download URL of the first .html file in Storage', async () => {
     listAllMock.mockResolvedValue({
-      items: [
-        { name: 'JorgeZumayaResume2026.pdf' },
-        { name: 'jorge-zumaya-resume.html' },
-      ],
+      items: [{ name: 'JorgeZumayaResume2026.pdf' }, { name: 'jorge-zumaya-resume.html' }],
     });
     getDownloadURLMock.mockResolvedValue('https://example.com/jorge-zumaya-resume.html');
 

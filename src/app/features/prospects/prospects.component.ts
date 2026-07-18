@@ -11,7 +11,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ContactService } from '../../core/services/contact.service';
 import { WHATSAPP_NUMBER } from '../../shared/constants';
 import { createToast } from '../../shared/forms/toast';
-import { injectIsBrowser } from '../../shared/util/platform';
+import { injectIsBrowser } from '../../shared/utils/platform';
 import { loadGoogleFonts } from '../../shared/dom/load-google-fonts';
 import {
   FORM_STRINGS,

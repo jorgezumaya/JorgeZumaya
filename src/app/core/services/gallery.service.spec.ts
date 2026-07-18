@@ -3,22 +3,18 @@ import { Storage } from '@angular/fire/storage';
 import { vi } from 'vitest';
 import { GalleryService } from './gallery.service';
 
-const { listAllMock, getDownloadURLMock } = vi.hoisted(() => ({
+const { refMock, listAllMock, getDownloadURLMock } = vi.hoisted(() => ({
+  refMock: vi.fn().mockReturnValue({ fullPath: 'Gallery' }),
   listAllMock: vi.fn(),
   getDownloadURLMock: vi.fn(),
 }));
 
-vi.mock('@angular/fire/storage', async () => {
-  const actual = await vi.importActual<typeof import('@angular/fire/storage')>(
-    '@angular/fire/storage',
-  );
-  return {
-    ...actual,
-    ref: vi.fn().mockReturnValue({ fullPath: 'Gallery' }),
-    listAll: listAllMock,
-    getDownloadURL: getDownloadURLMock,
-  };
-});
+vi.mock('@angular/fire/storage', () => ({
+  Storage: class {},
+  ref: refMock,
+  listAll: listAllMock,
+  getDownloadURL: getDownloadURLMock,
+}));
 
 describe('GalleryService', () => {
   let service: GalleryService;

@@ -48,7 +48,7 @@ describe('ProspectsComponent', () => {
 
   it('should build a WhatsApp link with the English message encoded', () => {
     expect(component.waHref).toContain('https://wa.me/');
-    expect(component.waHref).toContain(encodeURIComponent("Hi Jorge, I saw your page"));
+    expect(component.waHref).toContain(encodeURIComponent('Hi Jorge, I saw your page'));
   });
 
   it('should toggle the language menu open and closed', () => {

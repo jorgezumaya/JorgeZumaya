@@ -12,7 +12,8 @@ class MockIntersectionObserver implements IntersectionObserver {
 }
 
 if (typeof globalThis.IntersectionObserver === 'undefined') {
-  globalThis.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
+  globalThis.IntersectionObserver =
+    MockIntersectionObserver as unknown as typeof IntersectionObserver;
 }
 
 if (typeof globalThis.matchMedia === 'undefined') {

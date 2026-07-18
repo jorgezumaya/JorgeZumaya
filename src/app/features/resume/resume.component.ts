@@ -2,7 +2,7 @@ import { Component, OnInit, computed, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { ResumeService } from '../../core/services/resume.service';
-import { injectIsBrowser } from '../../shared/util/platform';
+import { injectIsBrowser } from '../../shared/utils/platform';
 
 @Component({
   selector: 'app-resume',
