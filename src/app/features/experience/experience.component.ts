@@ -59,18 +59,17 @@ export class ExperienceComponent {
           title: 'Full Stack Engineer',
           period: 'Jan 2023 – Present',
           bullets: [
-            // Internal system names generalized — safer for compliance and clearer to recruiters
-            'Subject matter expert for the Salesforce-based client communications platform; led knowledge transfer sessions across the engineering team covering customer engagement, notification, and agent-assignment APIs',
+            // Internal system names are generalized here for compliance; avoid reintroducing them
+            'Serve as subject matter expert for the Salesforce-based client communications platform, leading knowledge transfer sessions across the engineering team on customer engagement, notification, and agent-assignment APIs',
             'Led Salesforce Seasonal Release validation across the squad, coordinating testing and sign-off for production readiness',
-            'Delivered an executive-level demo of the client communications platform to senior leadership with ~1 week of notice — recognized for clarity and depth by stakeholders',
-            'Architected a REST API to replace legacy Salesforce Apex link-generation logic; designed, built, and validated end-to-end in non-prod environments',
+            'Delivered an executive-level demo of the client communications platform to senior leadership with about a week of notice, earning recognition from stakeholders for its clarity and depth',
+            'Architected a REST API to replace legacy Salesforce Apex link-generation logic; designed, built, and validated it end-to-end in non-prod environments',
             'Coached teammates across squads on Salesforce and platform architecture; recognized multiple times with "Fidelity On the Spot" and "Coaches Others to Their Full Potential" awards',
           ],
           stack: [
             'Angular',
             'TypeScript',
             'Java',
-            'Spring Boot',
             'Salesforce',
             'REST APIs',
             'GCP',
@@ -82,9 +81,9 @@ export class ExperienceComponent {
           period: 'Oct 2021 – Jan 2023',
           bullets: [
             'Supported the appointment scheduling tool hosted on Salesforce cloud communities, including client messaging and customer engagement workflows',
-            'Assisted in migrating scheduling functionality from Salesforce Communities onto the Angular GraphQL PI monorepo',
+            'Helped migrate scheduling functionality from Salesforce Communities onto the Angular GraphQL PI monorepo',
             'Implemented REST API best practices across presentation and smart components',
-            'Leveraged Salesforce Connected Apps to retrieve and surface data within Angular',
+            'Used Salesforce Connected Apps to retrieve and surface data within Angular',
           ],
           stack: ['Angular', 'TypeScript', 'Salesforce', 'GraphQL', 'REST APIs'],
         },
@@ -93,8 +92,8 @@ export class ExperienceComponent {
           period: 'Jun 2021 – Oct 2021',
           bullets: [
             'Developed Salesforce Lightning Web Components for a client messaging tool',
-            'Dynamically pulled user, client, and metadata from Salesforce via SOQL to power dynamic email delivery',
-            'Leveraged Salesforce Marketing Cloud Journeys to send targeted, personalized communications to customers',
+            'Pulled user, client, and metadata from Salesforce via SOQL to power personalized email delivery',
+            'Used Salesforce Marketing Cloud Journeys to send targeted, personalized communications to customers',
           ],
           stack: ['Salesforce LWC', 'Apex', 'SOQL', 'Marketing Cloud'],
         },
@@ -103,8 +102,8 @@ export class ExperienceComponent {
           period: 'Jun 2020 – Aug 2020',
           bullets: [
             'Developed features for an internal learning platform using EmberJS and Elixir',
-            'Worked in an agile environment leveraging Scrum alongside other interns',
-            'Managed enterprise tools: JIRA, Bitbucket, Jenkins, and Docker',
+            'Worked in an agile environment using Scrum alongside other interns',
+            'Worked with JIRA, Bitbucket, Jenkins, and Docker across team projects',
           ],
           stack: ['EmberJS', 'Elixir', 'JIRA', 'Docker', 'Jenkins'],
         },
@@ -114,10 +113,9 @@ export class ExperienceComponent {
 
   education: Education[] = [
     {
-      degree: 'M.B.A. — Information Technology Management',
+      degree: 'M.B.A., Information Technology Management',
       institution: 'Western Governors University',
-      period: 'March 2025 – Present',
-      note: 'Expected graduation May 2026',
+      period: 'March 2025 – April 2026',
     },
     {
       degree: 'B.S. Computer Engineering, Cum Laude',
@@ -135,7 +133,7 @@ export class ExperienceComponent {
     },
     {
       label: 'Cloud / Infra',
-      chips: ['Firebase', 'GCP', 'GitHub Actions', 'Jenkins', 'Cloudfare'],
+      chips: ['Firebase', 'GCP', 'GitHub Actions', 'Jenkins', 'Cloudflare'],
     },
     {
       label: 'Tools',
@@ -160,8 +158,8 @@ export class ExperienceComponent {
 
   testimonials: Testimonial[] = [
     {
-      // Revised: removed internal platform names ("Digital Engagements", "Client Messages")
-      // — clearer to external recruiters, no proprietary tool names exposed
+      // Internal platform names ("Digital Engagements", "Client Messages") are omitted;
+      // keep testimonials free of proprietary tool names
       quote:
         'Jorge continues to be my go-to resource for anything Salesforce and client communications. He absolutely exceeded expectations delivering a clear, high-level demo that gave attendees a strong understanding of the application.',
       author: 'Jordan Goudie',
@@ -169,8 +167,7 @@ export class ExperienceComponent {
       date: 'April 2026',
     },
     {
-      // Revised: replaced internal product name "APEx" with a description of what it is
-      // — meaning preserved, internal codename removed
+      // "APEx" is an internal codename; described generically here instead
       quote:
         'Jorge is growing into a developer that others come to for answers and guidance. He has done great work architecting a URL generation API to replace legacy Salesforce Apex logic, and has been branching out into areas that are new to him.',
       author: 'Chris Martin',
@@ -178,7 +175,6 @@ export class ExperienceComponent {
       date: 'April 2026',
     },
     {
-      // No changes needed — "client message development work in Salesforce" is clear and generic
       quote:
         'Jorge consistently goes above and beyond in delivering high quality client message development work in Salesforce, demonstrating exceptional clarity, ownership, and impact.',
       author: 'Yugandhar Yalamuru',
@@ -186,7 +182,6 @@ export class ExperienceComponent {
       date: 'December 2025',
     },
     {
-      // No changes needed — entirely behavioral, no product names
       quote:
         "I want to give a shoutout to Jorge for consistently going above and beyond to help me and others out whenever he can. Whether it's jumping in to solve a problem or connecting me with the right person, your support has been critical for our product area.",
       author: 'Jason Joy',
