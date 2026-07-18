@@ -8,4 +8,5 @@ export const ROUTE_PATHS = {
   gallery: 'gallery',
   contact: 'contact',
   prospects: 'prospects',
+  resume: 'resume',
 } as const;

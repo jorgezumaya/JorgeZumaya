@@ -10,6 +10,12 @@ export const routes: Routes = [
     title: 'JORGE | Websites That Win Customers | Sitios web que ganan clientes',
   },
   {
+    path: ROUTE_PATHS.resume,
+    loadComponent: () =>
+      import('./features/resume/resume.component').then((m) => m.ResumeComponent),
+    title: 'Jorge Zumaya Resume',
+  },
+  {
     path: ROUTE_PATHS.home,
     component: ShellComponent,
     children: [

@@ -1,0 +1,12 @@
+@if (safeUrl(); as src) {
+  <iframe [src]="src" title="Jorge Zumaya — Resume"></iframe>
+} @else if (error()) {
+  <div class="state">
+    <p>Sorry — the resume couldn't be loaded right now.</p>
+    <p>Please try again shortly, or reach out via <a routerLink="/contact">the contact page</a>.</p>
+  </div>
+} @else {
+  <div class="state" aria-live="polite">
+    <p>Loading resume…</p>
+  </div>
+}
