@@ -163,7 +163,7 @@ export class ExperienceComponent {
       quote:
         'Jorge continues to be my go-to resource for anything Salesforce and client communications. He absolutely exceeded expectations delivering a clear, high-level demo that gave attendees a strong understanding of the application.',
       author: 'Jordan Goudie',
-      role: 'Colleague, Fidelity Investments',
+      role: 'Principal Business Analyst, Fidelity Investments',
       date: 'April 2026',
     },
     {
@@ -171,14 +171,14 @@ export class ExperienceComponent {
       quote:
         'Jorge is growing into a developer that others come to for answers and guidance. He has done great work architecting a URL generation API to replace legacy Salesforce Apex logic, and has been branching out into areas that are new to him.',
       author: 'Chris Martin',
-      role: 'Senior Engineer, Fidelity Investments',
+      role: 'Principal Software Engineer, Fidelity Investments',
       date: 'April 2026',
     },
     {
       quote:
         'Jorge consistently goes above and beyond in delivering high quality client message development work in Salesforce, demonstrating exceptional clarity, ownership, and impact.',
       author: 'Yugandhar Yalamuru',
-      role: 'Colleague, Fidelity Investments',
+      role: 'Principal Software Engineer in Test, Fidelity Investments',
       date: 'December 2025',
     },
     {
