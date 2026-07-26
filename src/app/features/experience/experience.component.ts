@@ -185,7 +185,7 @@ export class ExperienceComponent {
       quote:
         "I want to give a shoutout to Jorge for consistently going above and beyond to help me and others out whenever he can. Whether it's jumping in to solve a problem or connecting me with the right person, your support has been critical for our product area.",
       author: 'Jason Joy',
-      role: 'Colleague, Fidelity Investments',
+      role: 'Senior Software Engineer, Fidelity Investments',
       date: 'June 2025',
     },
   ];
